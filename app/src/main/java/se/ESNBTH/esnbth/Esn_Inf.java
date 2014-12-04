@@ -7,7 +7,7 @@ import android.view.MenuItem;
 
 import se.ESNBTH.esnbth.R;
 
-public class EsnInf extends Activity {
+public class Esn_Inf extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

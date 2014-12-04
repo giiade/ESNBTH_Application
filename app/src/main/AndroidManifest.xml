@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SplashScreen"
+            android:name=".Splash_Screen"
             android:label="@string/title_activity_splash_screen" />
         <activity
             android:name=".Event_List"
@@ -28,16 +28,16 @@
             android:name=".News_List"
             android:label="@string/title_activity_news_list"></activity>
         <activity
-            android:name=".KarlskronaInf"
+            android:name=".Karlskrona_Inf"
             android:label="@string/title_activity_karlskrona_inf"></activity>
         <activity
-            android:name=".NewsInf"
+            android:name=".News_Inf"
             android:label="@string/title_activity_news_inf"></activity>
         <activity
-            android:name=".EventInf"
+            android:name=".Event_Inf"
             android:label="@string/title_activity_event_inf"></activity>
         <activity
-            android:name=".EsnInf"
+            android:name=".Esn_Inf"
             android:label="@string/title_activity_esn_inf"></activity>
     </application>
 

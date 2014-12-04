@@ -7,19 +7,19 @@ import android.view.MenuItem;
 
 import se.ESNBTH.esnbth.R;
 
-public class KarlskronaInf extends Activity {
+public class Splash_Screen extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_karlskrona_inf);
+        setContentView(R.layout.activity_splash_screen);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.karlskrona_inf, menu);
+        getMenuInflater().inflate(R.menu.splash_screen, menu);
         return true;
     }
 
