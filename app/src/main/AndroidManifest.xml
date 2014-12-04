@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="se.ESNBTH.esnbth" >
+    package="se.ESNBTH.esnbth">
 
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MainLayActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,7 +20,25 @@
         </activity>
         <activity
             android:name=".SplashScreen"
-            android:label="@string/title_activity_splash_screen"></activity>
+            android:label="@string/title_activity_splash_screen" />
+        <activity
+            android:name=".Event_List"
+            android:label="@string/title_activity_event__list"></activity>
+        <activity
+            android:name=".News_List"
+            android:label="@string/title_activity_news_list"></activity>
+        <activity
+            android:name=".KarlskronaInf"
+            android:label="@string/title_activity_karlskrona_inf"></activity>
+        <activity
+            android:name=".NewsInf"
+            android:label="@string/title_activity_news_inf"></activity>
+        <activity
+            android:name=".EventInf"
+            android:label="@string/title_activity_event_inf"></activity>
+        <activity
+            android:name=".EsnInf"
+            android:label="@string/title_activity_esn_inf"></activity>
     </application>
 
 </manifest>
