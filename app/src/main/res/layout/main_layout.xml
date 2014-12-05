@@ -6,11 +6,103 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="#1F1F1F"
     tools:context=".MyActivity">
 
     <TextView
-        android:text="@string/hello_world"
+        android:text="Future Events"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textSize="26sp"
+        android:textColor="#FFF"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"/>
+    
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></ListView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="150dp">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#FA741B"
+            android:layout_weight=".35"
+            android:layout_marginRight="15dp"
+            android:text="News"
+            android:textColor="#FFF"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:textSize="22sp"
+            android:onClick="openNewsActivity"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#41BA36"
+            android:layout_weight=".65"
+            android:text="Events"
+            android:textColor="#FFF"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:textSize="22sp"
+            android:onClick="openEventsActivity"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="90dp">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#41BA36"
+            android:layout_weight=".65"
+            android:layout_marginRight="15dp"
+            android:text="About Karlskrona"
+            android:textColor="#FFF"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:textSize="22sp"
+            android:onClick="openAboutKarlActivity"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#FA741B"
+            android:layout_weight=".35"
+            android:text="About Us"
+            android:textColor="#FFF"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:textSize="22sp"
+            android:onClick="openAboutUsActivity"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:layout_centerHorizontal="true">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#61CAFF"
+            android:text="Visit Us"
+            android:textColor="#FFF"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:textSize="22sp"/>
+
+    </LinearLayout>
 
 </RelativeLayout>

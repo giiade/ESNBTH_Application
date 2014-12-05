@@ -1,9 +1,11 @@
 package se.ESNBTH.esnbth;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 
 public class MainLayActivity extends Activity {
@@ -33,4 +35,25 @@ public class MainLayActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public void openNewsActivity(View view) {
+        Intent intent = new Intent(this, News_List.class);
+        startActivity(intent);
+    }
+
+    public void openEventsActivity(View view) {
+        Intent intent = new Intent(this, Event_List.class);
+        startActivity(intent);
+    }
+
+    public void openAboutKarlActivity(View view) {
+        Intent intent = new Intent(this, Karlskrona_Inf.class);
+        startActivity(intent);
+    }
+
+    public void openAboutUsActivity(View view) {
+        Intent intent = new Intent(this, Esn_Inf.class);
+        startActivity(intent);
+    }
+
 }
