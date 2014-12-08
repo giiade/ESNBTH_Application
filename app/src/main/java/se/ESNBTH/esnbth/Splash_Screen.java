@@ -15,6 +15,15 @@ import se.ESNBTH.esnbth.R;
 
 public class Splash_Screen extends Activity {
 
+    //TODO:
+    /*
+    Facebook Api.
+    Pagina web ESNBTH
+    https://developers.facebook.com/tools/explorer?method=GET&path=348101891945454%2Fevents&version=v2.2
+    Recoger eventos desde ahí.
+
+     */
+
     private static int SPLASH_TIMEOUT = 1500;
     Animation fadeOut;
     RelativeLayout splashLay;
