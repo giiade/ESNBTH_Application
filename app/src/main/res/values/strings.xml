@@ -12,4 +12,21 @@
     <string name="title_activity_event_inf">EventInf</string>
     <string name="title_activity_esn_inf">EsnInf</string>
 
+    <string-array name="nav_drawer_items">
+        <item>Accueil</item>
+        <item>Karlskrona</item>
+    </string-array>
+
+
+
+    <!-- Nav Drawer List Item Icons -->
+    <!-- Keep them in order as the titles are in -->
+    <array name="nav_drawer_icons">
+        <item>@drawable/ic_everyday</item>
+        <item>@drawable/ic_world</item>
+    </array>
+
+    <!-- Content Description -->
+    <string name="desc_list_item_icon">Item Icon</string>
+
 </resources>
