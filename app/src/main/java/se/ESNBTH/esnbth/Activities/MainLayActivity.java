@@ -1,7 +1,7 @@
-package se.ESNBTH.esnbth;
+package se.ESNBTH.esnbth.Activities;
 
 import android.app.ActionBar;
-import android.app.Activity;
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -20,8 +20,11 @@ import android.support.v4.widget.DrawerLayout;
 
 import java.util.ArrayList;
 
+import se.ESNBTH.esnbth.Fragments.Fragment_Home;
+import se.ESNBTH.esnbth.Fragments.Fragment_Karlskrona;
 import se.ESNBTH.esnbth.NavigationDrawer.NavDrawerItem;
 import se.ESNBTH.esnbth.NavigationDrawer.NavDrawerListAdapter;
+import se.ESNBTH.esnbth.R;
 
 
 public class MainLayActivity extends ActionBarActivity {
@@ -43,6 +46,7 @@ public class MainLayActivity extends ActionBarActivity {
     private ArrayList<NavDrawerItem> navDrawerItems;
     private NavDrawerListAdapter adapter;
 
+    public Fragment fragment;
 
 
     @Override
@@ -179,10 +183,10 @@ public class MainLayActivity extends ActionBarActivity {
      * */
     private void displayView(int position) {
         // update the main content by replacing fragments
-        //fragment = null;
+        fragment = null;
         switch (position) {
             case 0:
-                //fragment = Fragment_Home.newInstance(0);
+                fragment = new Fragment_Home();
                 break;
             case 1:
                 //fragment = Fragment_Home.newInstance(1);
@@ -194,9 +198,9 @@ public class MainLayActivity extends ActionBarActivity {
         }
 
 
-        if (false) {
-            /*FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();*/
+        if (fragment != null) {
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();
 
 
             // update selected item and title, then close the drawer
@@ -247,24 +251,9 @@ public class MainLayActivity extends ActionBarActivity {
         return super.onTouchEvent(event);
     }
 
-    public void openNewsActivity(View view) {
-        Intent intent = new Intent(this, News_List.class);
-        startActivity(intent);
-    }
-
-    public void openEventsActivity(View view) {
-        Intent intent = new Intent(this, Event_List.class);
-        startActivity(intent);
-    }
-
-    public void openAboutKarlActivity(View view) {
-        Intent intent = new Intent(this, Karlskrona_Inf.class);
-        startActivity(intent);
-    }
-
-    public void openAboutUsActivity(View view) {
-        Intent intent = new Intent(this, Esn_Inf.class);
-        startActivity(intent);
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
 }

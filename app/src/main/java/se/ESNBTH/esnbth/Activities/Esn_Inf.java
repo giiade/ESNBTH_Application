@@ -1,4 +1,4 @@
-package se.ESNBTH.esnbth;
+package se.ESNBTH.esnbth.Activities;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -7,19 +7,19 @@ import android.view.MenuItem;
 
 import se.ESNBTH.esnbth.R;
 
-public class Karlskrona_Inf extends Activity {
+public class Esn_Inf extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_karlskrona_inf);
+        setContentView(R.layout.activity_esn_inf);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.karlskrona_inf, menu);
+        getMenuInflater().inflate(R.menu.esn_inf, menu);
         return true;
     }
 

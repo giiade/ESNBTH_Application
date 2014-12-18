@@ -1,6 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="se.ESNBTH.esnbth.Esn_Inf">
+    tools:context="se.ESNBTH.esnbth.Activities.Esn_Inf">
     <item
         android:id="@+id/action_settings"
         android:title="@string/action_settings"
