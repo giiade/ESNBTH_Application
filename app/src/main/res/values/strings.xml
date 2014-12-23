@@ -29,6 +29,7 @@
     <!-- Content Description -->
     <string name="desc_list_item_icon">Item Icon</string>
 
+    <!-- Karlskrona Content-->
     <string name="karlskronaDescription">
         Karlskrona can proudly name itself \"Sweden\'s sunniest city\".
         It\'s not just the sun that every year attracts more visitors.
@@ -38,4 +39,27 @@
 
     <string name="karlskronaWelcome">Welcome to Karlskrona, in the middle of the archipelago!</string>
 
+    <!-- Shop Names -->
+    <string-array name="ShopsName">
+        <item>Systembolaget</item>
+        <item>Willys</item>
+        <item>Maxi</item>
+        <item>Lidl</item>
+    </string-array>
+
+    <!-- Shop Pictures -->
+    <string-array name="ShopsPicture">
+        <item>@drawable/systembolaget</item>
+        <item>@drawable/willys</item>
+        <item>@drawable/maxi</item>
+        <item>@drawable/lidl</item>
+    </string-array>
+
+    <!-- Shop Localisation -->
+    <string-array name="ShopsLocalisation">
+        <item>Test</item>
+        <item>Bla</item>
+        <item>Thusy</item>
+        <item>BTH</item>
+    </string-array>
 </resources>

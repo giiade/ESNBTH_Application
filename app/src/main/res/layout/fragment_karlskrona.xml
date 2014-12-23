@@ -67,7 +67,7 @@
         android:paddingTop="20dp"
         android:paddingBottom="20dp">
         <Button
-            android:id="@+id/btnVisitUs"
+            android:id="@+id/btnTimetable"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#16A5D7"
