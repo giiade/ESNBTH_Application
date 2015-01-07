@@ -2,7 +2,7 @@ package se.ESNBTH.esnbth.Fragments;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Intent;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -10,9 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import se.ESNBTH.esnbth.Activities.Esn_Inf;
-import se.ESNBTH.esnbth.Activities.Event_List;
-import se.ESNBTH.esnbth.Activities.News_List;
 import se.ESNBTH.esnbth.R;
 
 public class Fragment_Home extends Fragment {
@@ -30,7 +27,6 @@ public class Fragment_Home extends Fragment {
     public Fragment_Home(){}
 
 
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -49,9 +45,17 @@ public class Fragment_Home extends Fragment {
 
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
 
-                    fragmentManager = getFragmentManager();
+                    Fragment_Karlskrona newFragment = new Fragment_Karlskrona();
+
+                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+                    transaction.replace(R.id.frame_container, newFragment);
+                    transaction.commit();
+
+
+                   /* fragmentManager = getFragmentManager();
                     fragment = new Fragment_Karlskrona();
-                    fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();
+                    fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();*/
                     return true;
                 }
                 return true;

@@ -18,7 +18,6 @@
     </string-array>
 
 
-
     <!-- Nav Drawer List Item Icons -->
     <!-- Keep them in order as the titles are in -->
     <array name="nav_drawer_icons">
@@ -43,16 +42,21 @@
     <string-array name="ShopsName">
         <item>Systembolaget</item>
         <item>Willys</item>
-        <item>Maxi</item>
+        <item>Ica</item>
         <item>Lidl</item>
+        <item>City Gross</item>
+        <item>Hemköp</item>
+
     </string-array>
 
     <!-- Shop Pictures -->
     <string-array name="ShopsPicture">
-        <item>@drawable/systembolaget</item>
+        <item>@drawable/system</item>
         <item>@drawable/willys</item>
-        <item>@drawable/maxi</item>
+        <item>@drawable/ica</item>
         <item>@drawable/lidl</item>
+        <item>@drawable/city</item>
+        <item>@drawable/hemkop</item>
     </string-array>
 
     <!-- Shop Localisation -->
@@ -61,5 +65,7 @@
         <item>Bla</item>
         <item>Thusy</item>
         <item>BTH</item>
+        <item>City Gross</item>
+        <item>Hemköp</item>
     </string-array>
 </resources>

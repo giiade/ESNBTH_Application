@@ -3,10 +3,11 @@ package se.ESNBTH.esnbth.Activities;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -15,8 +16,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.widget.DrawerLayout;
 
 import java.util.ArrayList;
 
@@ -118,13 +117,13 @@ public class MainLayActivity extends ActionBarActivity {
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
     }
 
     /**
      * Slide menu item click listener
-     * */
+     */
     private class SlideMenuClickListener implements
             ListView.OnItemClickListener {
         @Override
@@ -165,7 +164,7 @@ public class MainLayActivity extends ActionBarActivity {
     }
 
     /* *
-	 * Called when invalidateOptionsMenu() is triggered
+     * Called when invalidateOptionsMenu() is triggered
 	 */
 
     // NOT SURE IF WE NEED THIS OR NOT
@@ -180,7 +179,7 @@ public class MainLayActivity extends ActionBarActivity {
 
     /**
      * Diplaying fragment view for selected nav drawer list item
-     * */
+     */
     private void displayView(int position) {
         // update the main content by replacing fragments
         fragment = null;
@@ -189,7 +188,7 @@ public class MainLayActivity extends ActionBarActivity {
                 fragment = new Fragment_Home();
                 break;
             case 1:
-                //fragment = Fragment_Home.newInstance(1);
+                fragment = new Fragment_Karlskrona();
                 break;
 
 
@@ -244,7 +243,7 @@ public class MainLayActivity extends ActionBarActivity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.list_slidermenu);
 
-        if(mDrawerLayout.isDrawerOpen(mDrawerList) ||
+        if (mDrawerLayout.isDrawerOpen(mDrawerList) ||
                 mDrawerLayout.isDrawerVisible(mDrawerList)) {
             return true;
         }
