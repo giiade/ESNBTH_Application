@@ -51,15 +51,13 @@ public class MainLayActivity extends ActionBarActivity {
     public Fragment fragment;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_layout);
-        if (Session.getActiveSession().isOpened()){
-            Log.i("FACEBOOKEA","ESTOY DENTRO");
-        }else{
-            Log.i("FACEBOOKEA","ESTOY FUERA");
-        }
+
 
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);

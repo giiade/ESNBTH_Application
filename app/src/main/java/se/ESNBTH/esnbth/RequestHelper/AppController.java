@@ -1,4 +1,4 @@
-package se.ESNBTH.esnbth.RequestHandler;
+package se.ESNBTH.esnbth.RequestHelper;
 
 import android.app.Application;
 import android.text.TextUtils;
