@@ -17,6 +17,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.facebook.AppEventsLogger;
+import com.facebook.Session;
+
 import java.util.ArrayList;
 
 import se.ESNBTH.esnbth.Fragments.Fragment_Home;
@@ -52,6 +55,11 @@ public class MainLayActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_layout);
+        if (Session.getActiveSession().isOpened()){
+            Log.i("FACEBOOKEA","ESTOY DENTRO");
+        }else{
+            Log.i("FACEBOOKEA","ESTOY FUERA");
+        }
 
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
@@ -120,6 +128,15 @@ public class MainLayActivity extends ActionBarActivity {
     @Override
     public void onResume() {
         super.onResume();
+        // Logs 'install' and 'app activate' App Events.
+        AppEventsLogger.activateApp(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Logs 'install' and 'app activate' App Events.
+        AppEventsLogger.activateApp(this);
     }
 
     /**

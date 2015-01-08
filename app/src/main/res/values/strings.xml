@@ -68,4 +68,7 @@
         <item>City Gross</item>
         <item>Hemköp</item>
     </string-array>
+
+    <!-- Facebook Strings -->
+    <string name="facebook_app_id">324146637774895</string>
 </resources>
