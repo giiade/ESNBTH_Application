@@ -81,6 +81,9 @@ public class Splash_Screen extends FragmentActivity {
                 if (user != null) {
                     loginBtn.setVisibility(View.GONE);
                     splashText.setVisibility(View.VISIBLE);
+                    Intent i = new Intent(Splash_Screen.this, MainLayActivity.class);
+                    startActivity(i);
+                    finish();
                 }
 
             }
