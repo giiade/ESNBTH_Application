@@ -29,7 +29,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import se.ESNBTH.esnbth.R;
@@ -49,7 +52,6 @@ public class Fragment_Home extends Fragment {
     private UiLifecycleHelper uiHelper;
     private Fragment fragment;
     private FragmentManager fragmentManager;
-    String requestId;
 
     private Session.StatusCallback callback = new Session.StatusCallback() {
         @Override
@@ -72,6 +74,9 @@ public class Fragment_Home extends Fragment {
         }
 
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+
+        Log.i("DATE",AppConst.getSinceTime());
+
 
         btnNews = (Button) rootView.findViewById(R.id.btnNews);
         btnEvents = (Button) rootView.findViewById(R.id.btnEvents);
@@ -208,7 +213,9 @@ public class Fragment_Home extends Fragment {
     private void requestAllEvents(){
         String EVENTS = "events";
         Bundle bun = new Bundle();
-        bun.putString("fields","id,name,description,location,start_time");
+        //bun.putString("fields","id,name,description,location,start_time");
+        bun.putString("fields","id,name");
+        bun.putString("since",AppConst.getSinceTime());
         bun.putInt("limit",100);
         //PAGEID/Events
         String requestStuff = AppConst.Facebook_PageName+EVENTS;
@@ -227,9 +234,9 @@ public class Fragment_Home extends Fragment {
                             Event event = new Event();
                             event.setId(item.getString(AppConst.ID_KEY));
                             event.setName(item.getString(AppConst.NAME_KEY));
-                            event.setDescription(item.getString(AppConst.DESCRIPTION_KEY));
-                            event.setLocation(item.getString(AppConst.DESCRIPTION_KEY));
-                            event.setStartTime(item.getString(AppConst.START_TIME_KEY));
+                           // event.setDescription(item.getString(AppConst.DESCRIPTION_KEY));
+                            //event.setLocation(item.getString(AppConst.DESCRIPTION_KEY));
+                            //event.setStartTime(item.getString(AppConst.START_TIME_KEY));
                             String message = (String) item.get("id");
                             Log.i(TAG + ".ITEM " + i, message);
                             events.add(event);
@@ -245,11 +252,6 @@ public class Fragment_Home extends Fragment {
         }).executeAsync();
 
     }
-
-    /**
-     * Update the event array with last 100 event of the user.
-     */
-    private void requestEventsByFeed(){}
 
     /**
      * Update data of selected event
