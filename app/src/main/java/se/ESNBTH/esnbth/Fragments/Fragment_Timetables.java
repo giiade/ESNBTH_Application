@@ -2,6 +2,7 @@ package se.ESNBTH.esnbth.Fragments;
 
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import se.ESNBTH.esnbth.Activities.MainLayActivity;
 import se.ESNBTH.esnbth.ListView.CustomAdapter;
 import se.ESNBTH.esnbth.ListView.RowItem;
 import se.ESNBTH.esnbth.R;
@@ -27,6 +29,8 @@ public class Fragment_Timetables extends Fragment implements AdapterView.OnItemC
     List<RowItem> rowItems;
     ListView mylistview;
 
+    private Fragment fragment;
+    private FragmentManager fragmentManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,12 +46,13 @@ public class Fragment_Timetables extends Fragment implements AdapterView.OnItemC
 
         localisation = getResources().getStringArray(R.array.ShopsLocalisation);
 
-
         for (int i = 0; i < shop_names.length; i++) {
             RowItem item = new RowItem(shop_names[i],
                     shop_pics.getResourceId(i, -1),
                     localisation[i]);
             rowItems.add(item);
+
+            System.out.println(shop_names[i]);
         }
 
         mylistview = (ListView) rootView.findViewById(R.id.list);
@@ -56,6 +61,7 @@ public class Fragment_Timetables extends Fragment implements AdapterView.OnItemC
         shop_pics.recycle();
         mylistview.setOnItemClickListener(this);
 
+        MainLayActivity.previousFragment = 1;
 
         return rootView;
     }
@@ -66,9 +72,9 @@ public class Fragment_Timetables extends Fragment implements AdapterView.OnItemC
     public void onItemClick(AdapterView<?> parent, View view, int position,
                             long id) {
 
-        String member_name = rowItems.get(position).getShop_name();
-        Toast.makeText(getActivity().getApplicationContext(), "" + member_name,
-                Toast.LENGTH_SHORT).show();
+        fragmentManager = getFragmentManager();
+        fragment = Fragment_DetailTimetable.newInstance(position, rowItems.get(position).getLocalisation(), rowItems.get(position).getShop_pic_id());
+        fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();
     }
 
 }

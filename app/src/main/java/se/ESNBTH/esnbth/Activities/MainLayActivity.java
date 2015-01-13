@@ -1,8 +1,10 @@
 package se.ESNBTH.esnbth.Activities;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -24,6 +26,7 @@ import java.util.ArrayList;
 
 import se.ESNBTH.esnbth.Fragments.Fragment_Home;
 import se.ESNBTH.esnbth.Fragments.Fragment_Karlskrona;
+import se.ESNBTH.esnbth.Fragments.Fragment_Timetables;
 import se.ESNBTH.esnbth.NavigationDrawer.NavDrawerItem;
 import se.ESNBTH.esnbth.NavigationDrawer.NavDrawerListAdapter;
 import se.ESNBTH.esnbth.R;
@@ -49,7 +52,7 @@ public class MainLayActivity extends ActionBarActivity {
     private NavDrawerListAdapter adapter;
 
     public Fragment fragment;
-
+    public static int previousFragment = 0;
 
 
 
@@ -171,9 +174,10 @@ public class MainLayActivity extends ActionBarActivity {
 
         int id = item.getItemId();
         if (id == R.id.actionbarhome) {
-            /*
-            Intent intent = new Intent(this, MainLayActivity.class);
-            startActivity(intent);*/
+            fragment = new Fragment_Home();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();
+            previousFragment = 0;
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -268,7 +272,32 @@ public class MainLayActivity extends ActionBarActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+
+        if(previousFragment == 0){
+            fragment = new Fragment_Home();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();
+
+            /*mDrawerList.setItemChecked(0, true);
+            mDrawerList.setSelection(0);
+            setTitle(navMenuTitles[0]);
+            mDrawerLayout.closeDrawer(mDrawerList);
+            getFragmentManager().popBackStack();*/
+        }
+
+        else if(previousFragment == 1){
+            fragment = new Fragment_Karlskrona();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();
+            previousFragment = 0;
+        }
+
+        else if(previousFragment == 2){
+            fragment = new Fragment_Timetables();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();
+            previousFragment = 1;
+        }
     }
 
 }

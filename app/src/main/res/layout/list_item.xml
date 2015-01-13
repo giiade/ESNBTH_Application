@@ -15,6 +15,7 @@
         android:id="@+id/shop_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/white"
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/shop_pic"
         android:paddingBottom="10dp"
@@ -23,6 +24,7 @@
 
     <TextView
         android:id="@+id/localisation"
+        android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/shop_name"

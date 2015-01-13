@@ -18,6 +18,7 @@ public class CustomAdapter extends BaseAdapter {
 
     Context context;
     List<RowItem> rowItems;
+    ViewHolder holder = null;
 
     public CustomAdapter(Context context, List<RowItem> rowItems) {
         this.context = context;
@@ -40,7 +41,7 @@ public class CustomAdapter extends BaseAdapter {
     }
 
     /* private view holder class */
-    private class ViewHolder {
+    static class ViewHolder {
         ImageView shop_pic;
         TextView shop_name;
         TextView localisation;
@@ -49,7 +50,7 @@ public class CustomAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        ViewHolder holder = null;
+
 
         LayoutInflater mInflater = (LayoutInflater) context
                 .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
@@ -63,16 +64,16 @@ public class CustomAdapter extends BaseAdapter {
                     .findViewById(R.id.shop_pic);
             holder.localisation = (TextView) convertView.findViewById(R.id.localisation);
 
-            RowItem row_pos = rowItems.get(position);
-
-            holder.shop_pic.setImageResource(row_pos.getShop_pic_id());
-            holder.shop_name.setText(row_pos.getShop_name());
-            holder.localisation.setText(row_pos.getLocalisation());
-
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+
+        RowItem row_pos = rowItems.get(position);
+
+        holder.shop_pic.setImageResource(row_pos.getShop_pic_id());
+        holder.shop_name.setText(row_pos.getShop_name());
+        holder.localisation.setText(row_pos.getLocalisation());
 
         return convertView;
     }

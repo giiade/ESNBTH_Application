@@ -1,0 +1,271 @@
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="100"
+    android:orientation="vertical"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:paddingRight="5dp"
+    android:paddingLeft="5dp"
+    tools:context="se.ESNBTH.esnbth.Fragments.Fragment_Karlskrona">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="20"
+        android:gravity="center">
+        <ImageView
+            android:id="@+id/detailPic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/karlskrona"
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:paddingRight="5dp"
+        android:paddingLeft="5dp"
+        android:gravity="center">
+        <TextView
+            android:id="@+id/detailLocalisation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:text="@string/karlskronaDescription"/>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:paddingRight="5dp"
+        android:paddingLeft="5dp"
+        android:gravity="center"/>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:paddingRight="50dp"
+        android:paddingLeft="50dp"
+        android:gravity="center">
+        <TextView
+            android:id="@+id/monday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="Monday"
+            android:layout_alignParentLeft="true"
+            android:textSize="14sp" />
+        <TextView
+            android:id="@+id/mondayTime"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10:00 AM - 10:00 PM"
+            android:layout_alignParentRight="true"
+            android:textSize="14sp" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:paddingRight="50dp"
+        android:paddingLeft="50dp"
+        android:gravity="center">
+        <TextView
+            android:id="@+id/tuesday"
+            android:layout_width="wrap_content"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"
+            android:text="Tuesday"
+            android:layout_alignParentLeft="true"
+            android:textSize="14sp" />
+        <TextView
+            android:id="@+id/tuesdayTime"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10:00 AM - 10:00 PM"
+            android:layout_alignParentRight="true"
+            android:textSize="14sp" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:paddingRight="50dp"
+        android:paddingLeft="50dp"
+        android:gravity="center">
+        <TextView
+            android:id="@+id/wednesday"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Wednesday"
+            android:layout_alignParentLeft="true"
+            android:textSize="14sp" />
+        <TextView
+            android:id="@+id/wednesdayTime"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10:00 AM - 10:00 PM"
+            android:layout_alignParentRight="true"
+            android:textSize="14sp" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:paddingRight="50dp"
+        android:paddingLeft="50dp"
+        android:gravity="center">
+        <TextView
+            android:id="@+id/thursday"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thursday"
+            android:layout_alignParentLeft="true"
+            android:textSize="14sp" />
+        <TextView
+            android:id="@+id/thursdayTime"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10:00 AM - 10:00 PM"
+            android:layout_alignParentRight="true"
+            android:textSize="14sp" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:paddingRight="50dp"
+        android:paddingLeft="50dp"
+        android:gravity="center">
+        <TextView
+            android:id="@+id/friday"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Friday"
+            android:layout_alignParentLeft="true"
+            android:textSize="14sp" />
+        <TextView
+            android:id="@+id/fridayTime"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10:00 AM - 10:00 PM"
+            android:layout_alignParentRight="true"
+            android:textSize="14sp" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:paddingRight="50dp"
+        android:paddingLeft="50dp"
+        android:gravity="center">
+        <TextView
+            android:id="@+id/saturday"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Saturday"
+            android:layout_alignParentLeft="true"
+            android:textSize="14sp" />
+        <TextView
+            android:id="@+id/saturdayTime"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10:00 AM - 10:00 PM"
+            android:layout_alignParentRight="true"
+            android:textSize="14sp" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:paddingRight="50dp"
+        android:paddingLeft="50dp"
+        android:gravity="center">
+        <TextView
+            android:id="@+id/sunday"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sunday"
+            android:layout_alignParentLeft="true"
+            android:textSize="14sp" />
+        <TextView
+            android:id="@+id/sundayTime"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10:00 AM - 10:00 PM"
+            android:layout_alignParentRight="true"
+            android:textSize="14sp" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:paddingRight="5dp"
+        android:paddingLeft="5dp"
+        android:gravity="center"/>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="21"
+        android:gravity="center"
+        android:padding="0dp">
+
+        <Button
+            android:id="@+id/btnMap"
+            android:layout_width="124dp"
+            android:layout_height="70dp"/>
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>

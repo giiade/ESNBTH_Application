@@ -40,33 +40,50 @@
 
     <!-- Shop Names -->
     <string-array name="ShopsName">
+        <item>City Gross</item>
+        <item>Elgiganten</item>
+        <item>Ica</item>
+        <item>Hemköp</item>
+        <item>Lidl</item>
+        <item>Max Burger</item>
+        <item>McDonald\'s</item>
+        <item>Second Hand</item>
+        <item>Systembolaget</item>
         <item>Systembolaget</item>
         <item>Willys</item>
-        <item>Ica</item>
-        <item>Lidl</item>
-        <item>City Gross</item>
-        <item>Hemköp</item>
-
+        <item>Willys</item>
     </string-array>
 
     <!-- Shop Pictures -->
     <string-array name="ShopsPicture">
-        <item>@drawable/system</item>
-        <item>@drawable/willys</item>
+        <item>@drawable/cityy</item>
+        <item>@drawable/elgiganten</item>
         <item>@drawable/ica</item>
-        <item>@drawable/lidl</item>
-        <item>@drawable/city</item>
         <item>@drawable/hemkop</item>
+        <item>@drawable/lidl</item>
+        <item>@drawable/maxburger</item>
+        <item>@drawable/mcdo</item>
+        <item>@drawable/secondhand</item>
+        <item>@drawable/systembo1</item>
+        <item>@drawable/systembo1</item>
+        <item>@drawable/willys1</item>
+        <item>@drawable/willys1</item>
     </string-array>
 
     <!-- Shop Localisation -->
     <string-array name="ShopsLocalisation">
-        <item>Test</item>
-        <item>Bla</item>
-        <item>Thusy</item>
-        <item>BTH</item>
-        <item>City Gross</item>
-        <item>Hemköp</item>
+        <item>Lyckebyvägen 1</item>
+        <item>Stationsvägen 29</item>
+        <item>Arklimästaregatan 40</item>
+        <item>Ronnebygatan 34</item>
+        <item>Borgmästarekajen 40</item>
+        <item>Lallerstedts gata 7</item>
+        <item>Affärshuset Kronan</item>
+        <item>Sunnavägen 99A</item>
+        <item>Arklimästaregatan 46</item>
+        <item>Verkövägen 9</item>
+        <item>Tullgatan 1</item>
+        <item>Stationsvägen 21</item>
     </string-array>
 
     <!-- Facebook Strings -->
