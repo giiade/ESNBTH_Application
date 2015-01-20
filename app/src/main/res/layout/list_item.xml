@@ -32,15 +32,17 @@
         android:text="txt"
         android:textSize="16sp" />
 
-    <!--
+
     <TextView
-        android:id="@+id/contact_type"
+        android:id="@+id/openClosed"
+        android:textColor="@color/blue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/member_name"
-        android:layout_alignBottom="@+id/member_name"
         android:layout_alignParentRight="true"
+        android:layout_alignBaseline="@id/localisation"
+        android:layout_marginRight="20dp"
+        android:textStyle="bold"
         android:text="txt"
-        android:textSize="16sp" /> -->
+        android:textSize="16sp" />
 
 </RelativeLayout>

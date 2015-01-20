@@ -5,12 +5,14 @@ public class RowItem {
     private String shop_name;
     private int shop_pic_id;
     private String localisation;
+    private String openClose;
 
-    public RowItem(String shop_name, int shop_pic_id, String localisation) {
+    public RowItem(String shop_name, int shop_pic_id, String localisation, String openClose) {
 
         this.shop_name = shop_name;
         this.shop_pic_id = shop_pic_id;
         this.localisation = localisation;
+        this.openClose = openClose;
     }
 
     public String getShop_name() {
@@ -37,5 +39,7 @@ public class RowItem {
         this.localisation = localisation;
     }
 
+    public String getOpenClose(){ return openClose; }
 
+    public void setOpenClose(String openClose) { this.openClose = openClose; }
 }

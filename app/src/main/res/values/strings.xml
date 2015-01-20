@@ -86,6 +86,22 @@
         <item>Stationsvägen 21</item>
     </string-array>
 
+    <!-- Open Closed -->
+    <string-array name="OpenClosed">
+        <item>Open</item>
+        <item>Open</item>
+        <item>Open</item>
+        <item>Open</item>
+        <item>Open</item>
+        <item>Open</item>
+        <item>Open</item>
+        <item>Open</item>
+        <item>Open</item>
+        <item>Open</item>
+        <item>Open</item>
+        <item>Open</item>
+    </string-array>
+
     <!-- Facebook Strings -->
     <string name="facebook_app_id">324146637774895</string>
 </resources>

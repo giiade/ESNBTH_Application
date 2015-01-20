@@ -4,6 +4,7 @@ package se.ESNBTH.esnbth.Fragments;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,11 +13,15 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.toolbox.ImageLoader;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import se.ESNBTH.esnbth.Activities.MainLayActivity;
@@ -29,6 +34,8 @@ public class Fragment_Timetables extends Fragment implements AdapterView.OnItemC
     String[] shop_names;
     TypedArray shop_pics;
     String[] localisation;
+    String[] openClosed;
+    TextView openClosedText;
 
     List<RowItem> rowItems;
     ListView mylistview;
@@ -51,10 +58,17 @@ public class Fragment_Timetables extends Fragment implements AdapterView.OnItemC
 
         localisation = getResources().getStringArray(R.array.ShopsLocalisation);
 
+        openClosed = getResources().getStringArray(R.array.OpenClosed);
+
+        openClosedText = (TextView) rootView.findViewById(R.id.openClosed);
+
+
+
         for (int i = 0; i < shop_names.length; i++) {
             RowItem item = new RowItem(shop_names[i],
                     shop_pics.getResourceId(i, -1),
-                    localisation[i]);
+                    localisation[i],
+                    openClosed[i]);
             rowItems.add(item);
 
         }
