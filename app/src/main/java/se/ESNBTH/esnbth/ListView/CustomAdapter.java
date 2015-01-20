@@ -76,18 +76,18 @@ public class CustomAdapter extends BaseAdapter {
         }
 
         RowItem row_pos = rowItems.get(pos);
-        if(pos == 0) Picasso.with(context).load(R.drawable.cityy).fit().into(holder.shop_pic);
-        if(pos == 1) Picasso.with(context).load(R.drawable.elgiganten).fit().into(holder.shop_pic);
-        if(pos == 2) Picasso.with(context).load(R.drawable.ica).fit().into(holder.shop_pic);
-        if(pos == 3) Picasso.with(context).load(R.drawable.hemkop).fit().into(holder.shop_pic);
-        if(pos == 4) Picasso.with(context).load(R.drawable.lidl).fit().into(holder.shop_pic);
-        if(pos == 5) Picasso.with(context).load(R.drawable.maxburger).fit().into(holder.shop_pic);
-        if(pos == 6) Picasso.with(context).load(R.drawable.mcdo).fit().into(holder.shop_pic);
-        if(pos == 7) Picasso.with(context).load(R.drawable.secondhand).fit().into(holder.shop_pic);
-        if(pos == 8) Picasso.with(context).load(R.drawable.systembo1).fit().into(holder.shop_pic);
-        if(pos == 9) Picasso.with(context).load(R.drawable.systembo1).fit().into(holder.shop_pic);
-        if(pos == 10) Picasso.with(context).load(R.drawable.willys1).fit().into(holder.shop_pic);
-        if(pos == 11) Picasso.with(context).load(R.drawable.willys1).fit().into(holder.shop_pic);
+        if(pos == 0) Picasso.with(context).load(R.drawable.cityy).fit().centerInside().into(holder.shop_pic);
+        if(pos == 1) Picasso.with(context).load(R.drawable.elgiganten).fit().centerInside().into(holder.shop_pic);
+        if(pos == 2) Picasso.with(context).load(R.drawable.ica).fit().centerInside().into(holder.shop_pic);
+        if(pos == 3) Picasso.with(context).load(R.drawable.hemkop).fit().centerInside().into(holder.shop_pic);
+        if(pos == 4) Picasso.with(context).load(R.drawable.lidl).fit().centerInside().into(holder.shop_pic);
+        if(pos == 5) Picasso.with(context).load(R.drawable.maxburger).fit().centerInside().into(holder.shop_pic);
+        if(pos == 6) Picasso.with(context).load(R.drawable.mcdo).fit().centerInside().into(holder.shop_pic);
+        if(pos == 7) Picasso.with(context).load(R.drawable.secondhand).fit().centerInside().into(holder.shop_pic);
+        if(pos == 8) Picasso.with(context).load(R.drawable.systembo1).fit().centerInside().into(holder.shop_pic);
+        if(pos == 9) Picasso.with(context).load(R.drawable.systembo1).fit().centerInside().into(holder.shop_pic);
+        if(pos == 10) Picasso.with(context).load(R.drawable.willys1).fit().centerInside().into(holder.shop_pic);
+        if(pos == 11) Picasso.with(context).load(R.drawable.willys1).fit().centerInside().into(holder.shop_pic);
 
         holder.shop_name.setText(row_pos.getShop_name());
         holder.localisation.setText(row_pos.getLocalisation());
