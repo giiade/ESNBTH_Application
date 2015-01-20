@@ -60,7 +60,7 @@ public class AppConst {
     public static ArrayList<Event> mergeAllImgEvents(List<Event> original, ArrayList<Event> events1){
         ArrayList<Event> result = new ArrayList<>();
 
-        for(int i = 0; i < events1.size();i++){
+        for(int i = 0; i < original.size();i++){
             Event event =  new Event(original.get(i));
             event.setImgUrl(events1.get(i).getImgUrl());
             result.add(event);

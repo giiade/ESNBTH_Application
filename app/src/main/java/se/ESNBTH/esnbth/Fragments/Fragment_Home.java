@@ -13,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
 
 import com.facebook.HttpMethod;
 import com.facebook.Request;
@@ -37,6 +38,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import se.ESNBTH.esnbth.ListView.EventAdapter;
 import se.ESNBTH.esnbth.R;
 import se.ESNBTH.esnbth.RequestHelper.AppConst;
 import se.ESNBTH.esnbth.RequestHelper.Event;
@@ -54,10 +56,15 @@ public class Fragment_Home extends Fragment {
     private UiLifecycleHelper uiHelper;
     private Fragment fragment;
     private FragmentManager fragmentManager;
-    List<Event> events = new ArrayList<>();
+    private List<Event> events = new ArrayList<>(); //Here we will save events.
     private int cont;
     private ArrayList<Event> imgEvents = new ArrayList<>();
     private ArrayList<Event> infoEvents = new ArrayList<>();
+
+    private EventAdapter eventAdapter;
+    private ListView eventList;
+
+
 
     private Session.StatusCallback callback = new Session.StatusCallback() {
         @Override
@@ -82,6 +89,11 @@ public class Fragment_Home extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
         Log.i("DATE",AppConst.getSinceTime());
+
+        //LIST
+        eventList = (ListView) rootView.findViewById(R.id.eventLst_main);
+        eventAdapter = new EventAdapter(getActivity(), events);
+        eventList.setAdapter(eventAdapter);
 
 
         btnNews = (Button) rootView.findViewById(R.id.btnNews);
@@ -249,6 +261,7 @@ public class Fragment_Home extends Fragment {
                             String message = (String) item.get("id");
                             Log.i(TAG + ".ITEM " + i, message);
                             events.add(event);
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -367,7 +380,7 @@ public class Fragment_Home extends Fragment {
                 }
 
                 //Get the data of the events
-                batchRequestImages(events);
+                //batchRequestImages(events);
                 //Get the Images of the events
                 batchRequestEvents(events);
 
@@ -398,13 +411,13 @@ public class Fragment_Home extends Fragment {
             //Request the information of the events and save it in @infoEvents
             for( int i = 0; i<eventsArray.size();i++){
 
-                //Get de id of the current event
+                //Get id of the current event
                 String requestID = eventsArray.get(i).getId();
 
                 //Create the request to the requestID
                 Bundle bun = new Bundle();
                 bun.putString("fields","id,name,description,location,start_time");
-                requestBatch.add( new Request(session,requestID,bun,null,new Request.Callback() {
+                Request request = new Request(session,requestID,bun,null,new Request.Callback() {
                     @Override
                     public void onCompleted(Response response) {
                        // Log.i(TAG,response.toString());
@@ -415,14 +428,18 @@ public class Fragment_Home extends Fragment {
                             item.setId((String) graphObject.getProperty(AppConst.ID_KEY));
                             item.setName((String) graphObject.getProperty(AppConst.NAME_KEY));
                             item.setDescription((String) graphObject.getProperty(AppConst.DESCRIPTION_KEY));
-                            item.setLocation((String) graphObject.getProperty(AppConst.DESCRIPTION_KEY));
+                            item.setLocation((String) graphObject.getProperty(AppConst.LOCATION_KEY));
                             item.setStartTime((String) graphObject.getProperty(AppConst.START_TIME_KEY));
 
                             //add the item to events
                             infoEvents.add(item);
                         }
                     }
-                }));
+                });
+
+
+
+                requestBatch.add(request);
 
             }
 
@@ -432,6 +449,9 @@ public class Fragment_Home extends Fragment {
                 public void onBatchCompleted(RequestBatch batch) {
                    events = AppConst.mergeAllInfoEvents(events,infoEvents);
                     Log.i("HOLA", events.get(0).getDescription());
+                    batchRequestImages(events);
+
+
                 }
             });
 
@@ -494,7 +514,8 @@ public class Fragment_Home extends Fragment {
                 public void onBatchCompleted(RequestBatch batch) {
                     events = AppConst.mergeAllImgEvents(events,imgEvents);
 
-                    Log.i("HOLA", events.get(0).getImgUrl());
+                    Log.i("IMAGE", events.get(0).getImgUrl());
+                    eventAdapter.swapItems(events);
                 }
             });
 

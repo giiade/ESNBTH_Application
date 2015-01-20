@@ -1,17 +1,28 @@
 package se.ESNBTH.esnbth.ListView;
 
 import android.app.Activity;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
+import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import java.util.List;
 
+import se.ESNBTH.esnbth.R;
 import se.ESNBTH.esnbth.RequestHelper.AppController;
 import se.ESNBTH.esnbth.RequestHelper.Event;
+import se.ESNBTH.esnbth.RequestHelper.LruBitmapCache;
+
+
 
 /**
  * Created by JulioLopez on 20/1/15.
@@ -22,7 +33,8 @@ public class EventAdapter extends BaseAdapter {
     private Activity activity;
     private LayoutInflater inflater;
     private List<Event> eventItems;
-    ImageLoader imageLoader = AppController.getInstance().getImageLoader();
+
+
 
     public EventAdapter(Activity activity, List<Event> eventItems) {
         this.activity = activity;
@@ -36,21 +48,62 @@ public class EventAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 0;
+        return eventItems.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return eventItems.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return null;
+        if (inflater == null)
+            inflater = (LayoutInflater) activity
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        if (convertView == null)
+            convertView = inflater.inflate(R.layout.eventlist_adapter, null);
+
+
+        ImageView thumbNail = (ImageView) convertView
+                .findViewById(R.id.imgAdapter);
+        TextView title = (TextView) convertView.findViewById(R.id.titleTxt_adapter);
+        TextView day = (TextView) convertView.findViewById(R.id.dayText);
+        TextView place = (TextView) convertView.findViewById(R.id.place_adapter);
+
+        // getting event data for the row
+        Event e = eventItems.get(position);
+
+        // thumbnail image
+        String imageUrl = e.getImgUrl();
+
+
+
+        Picasso.with(convertView.getContext())
+                .load(imageUrl)
+                //.resize(100, 100)
+                .fit()
+                .into(thumbNail);
+        //thumbNail.setImageUrl(imageUrl, imageLoader);
+
+
+        // title
+        title.setText(e.getName());
+
+        //Day
+        day.setText(e.getStartTime());
+
+        //Place
+        place.setText(e.getLocation());
+
+
+
+
+        return convertView;
     }
 }
