@@ -109,7 +109,6 @@ public class CustomAdapter extends BaseAdapter {
         hour = calendar.get(Calendar.HOUR_OF_DAY);
         minute = calendar.get(Calendar.MINUTE);
 
-        Log.e(hour+"","");
 
         //CITY GROSS
         if(pos == 0){
