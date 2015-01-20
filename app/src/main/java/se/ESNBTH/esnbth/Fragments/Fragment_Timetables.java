@@ -5,12 +5,16 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.android.volley.toolbox.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +32,7 @@ public class Fragment_Timetables extends Fragment implements AdapterView.OnItemC
 
     List<RowItem> rowItems;
     ListView mylistview;
+    CustomAdapter adapter;
 
     private Fragment fragment;
     private FragmentManager fragmentManager;
@@ -52,14 +57,15 @@ public class Fragment_Timetables extends Fragment implements AdapterView.OnItemC
                     localisation[i]);
             rowItems.add(item);
 
-            System.out.println(shop_names[i]);
         }
 
         mylistview = (ListView) rootView.findViewById(R.id.list);
-        CustomAdapter adapter = new CustomAdapter(getActivity().getApplicationContext(), rowItems);
+        adapter = new CustomAdapter(getActivity().getApplicationContext(), rowItems);
+
         mylistview.setAdapter(adapter);
         shop_pics.recycle();
         mylistview.setOnItemClickListener(this);
+
 
         MainLayActivity.previousFragment = 1;
 
