@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import se.ESNBTH.esnbth.Activities.MainLayActivity;
@@ -45,7 +46,7 @@ public class Fragment_DetailTimetable extends Fragment {
     private TextView fridayTime;
     private TextView saturdayTime;
     private TextView sundayTime;
-    private Button map;
+    private ImageButton map;
 
     private String mapPos;
 
@@ -87,14 +88,17 @@ public class Fragment_DetailTimetable extends Fragment {
         saturdayTime = (TextView) rootView.findViewById(R.id.saturdayTime);
         sundayTime = (TextView) rootView.findViewById(R.id.sundayTime);
         detailPic = (ImageView) rootView.findViewById(R.id.detailPic);
-        map = (Button) rootView.findViewById(R.id.btnMap);
-        map.setBackgroundResource(R.drawable.mapslogo1);
+        map = (ImageButton) rootView.findViewById(R.id.btnMap);
+        //map.setBackgroundResource(R.drawable.mapslogo1);
 
         detailLocalisation.setText(Localisation);
         detailPic.setImageResource(Image);
 
         // COLOR CURRENT DAY
         Calendar calendar = Calendar.getInstance();
+        Date date = Calendar.getInstance().getTime();
+
+
         int day = calendar.get(Calendar.DAY_OF_WEEK);
 
         if(day == 1){
