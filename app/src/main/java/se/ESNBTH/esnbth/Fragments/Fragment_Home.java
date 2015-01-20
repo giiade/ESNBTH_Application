@@ -76,6 +76,12 @@ public class Fragment_Home extends Fragment {
 
     public Fragment_Home(){}
 
+    //TODO: If the event list is empty create an input with a text "NO EVENTS YET"
+    //TODO: Add a since so the event list just show future events.
+    //TODO: Create a new layout for showing single events
+    //TODO: Create a new fragment for showing single events
+    //TODO: Create a new fragment and layout for showing all the events future and past
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -180,7 +186,8 @@ public class Fragment_Home extends Fragment {
             btnAboutUs.setVisibility(View.VISIBLE);
 
             //doBatchRequest();  --> DEBUG VERSION
-            requestAllEvents();
+            //requestAllEvents();
+            requestFurtherWeekEvents();
 
 
             // Request user data and show the results
@@ -269,7 +276,7 @@ public class Fragment_Home extends Fragment {
                 }
 
                 //Get the data of the events
-                batchRequestImages(events);
+                //batchRequestImages(events);
                 //Get the Images of the events
                 batchRequestEvents(events);
 
@@ -384,8 +391,6 @@ public class Fragment_Home extends Fragment {
                 //Get the Images of the events
                 batchRequestEvents(events);
 
-
-                //TODO:SET ADAPTER FOR THE LISTVIEW
 
             }
         }).executeAsync();
