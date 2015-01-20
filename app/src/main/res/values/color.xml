@@ -1,11 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- STUFF FOR LISTS -->
     <color name="list_item_title">#fff</color>
     <color name="list_background">#303030</color>
     <color name="list_background_pressed">#992416</color>
     <color name="list_divider">#272727</color>
     <color name="counter_text_bg">#626262</color>
     <color name="counter_text_color">#c5c4c4</color>
-    <color name="blue">#16A5D7</color>
-    <color name="white">#FFF</color>
+
+    <!-- grayscale -->
+    <color name="white"     >#FFFFFF</color>
+    <color name="gray_light">#DBDBDB</color>
+    <color name="gray"      >#939393</color>
+    <color name="gray_dark" >#5F5F5F</color>
+    <color name="black"     >#323232</color>
+
+
+    <!-- COLORS -->
+    <color name="blue">#00AEEF</color>
+    <color name="ESNPink">#EC008C</color>
+    <color name="ESNGreen">#7AC143</color>
+    <color name="ESNOrange">#F47820</color>
+    <color name="ESNDarkBlue">#2E3192</color>
 </resources>

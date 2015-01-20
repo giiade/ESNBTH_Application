@@ -34,6 +34,8 @@ import se.ESNBTH.esnbth.R;
 
 public class MainLayActivity extends ActionBarActivity {
 
+    //TODO: ADD FACEBOOK LOGIN BUTTON TO NAVIGATION DRAWER. IT WILL BE FOR LOG OUT.
+
 
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;

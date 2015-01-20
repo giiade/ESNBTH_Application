@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Image -->
+     <ImageView
+         android:id="@+id/imgAdapter"
+         android:layout_width="100dp"
+         android:layout_height="100dp"
+         android:layout_margin="10dp"
+         android:scaleType="fitXY"/>
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/titleTxt_adapter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="Title"
+        android:textColor="@color/ESNOrange"
+        android:textStyle="bold"
+        android:layout_toRightOf="@+id/imgAdapter"
+        android:layout_marginTop="10dp"/>
+
+    <!-- Date -->
+    <TextView
+        android:id="@+id/dayText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/gray_light"
+        android:text="DAY"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_toRightOf="@+id/imgAdapter"
+        android:layout_below="@+id/titleTxt_adapter"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+
+        />
+
+
+
+
+    <!-- Place -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/imgAdapter"
+        android:text="PLACE"
+        android:layout_alignBottom="@+id/imgAdapter"
+        android:textSize="18sp"
+        android:textColor="@color/gray"
+        />
+
+
+</RelativeLayout>

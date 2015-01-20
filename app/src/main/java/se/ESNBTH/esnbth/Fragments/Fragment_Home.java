@@ -167,7 +167,7 @@ public class Fragment_Home extends Fragment {
         if (state.isOpened()) {
             btnAboutUs.setVisibility(View.VISIBLE);
 
-            doBatchRequest();
+            //doBatchRequest();  --> DEBUG VERSION
             requestAllEvents();
 
 
@@ -262,8 +262,6 @@ public class Fragment_Home extends Fragment {
 
 
                 //TODO:SET ADAPTER FOR THE LISTVIEW
-                //TODO:IF EVENTS NOT WORKS TRY WITH FEED LINKS.
-
             }
         }).executeAsync();
 
@@ -375,7 +373,6 @@ public class Fragment_Home extends Fragment {
 
 
                 //TODO:SET ADAPTER FOR THE LISTVIEW
-                //TODO:IF EVENTS NOT WORKS TRY WITH FEED LINKS.
 
             }
         }).executeAsync();

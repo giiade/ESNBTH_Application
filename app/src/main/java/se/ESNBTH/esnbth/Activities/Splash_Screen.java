@@ -68,6 +68,8 @@ public class Splash_Screen extends FragmentActivity {
         uiHelper = new UiLifecycleHelper(this,statusCallback);
         uiHelper.onCreate(savedInstanceState);
 
+//        getActionBar().hide(); //We hide the actionbar as we would not need it on this screen.
+
         setContentView(R.layout.activity_splash_screen);
 
         splashLay = (RelativeLayout) findViewById(R.id.splashLayout);
@@ -100,7 +102,9 @@ public class Splash_Screen extends FragmentActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                /* */
+                /* If we are already logged in it will cast the intent
+                 * and if we are not logged it will cast the main screen to login
+                 */
                 if(Session.getActiveSession().isOpened()){
                     Intent i = new Intent(Splash_Screen.this, MainLayActivity.class);
                     startActivity(i);
@@ -140,25 +144,6 @@ public class Splash_Screen extends FragmentActivity {
         }, SPLASH_TIMEOUT);
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.splash_screen, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public void onResume() {
