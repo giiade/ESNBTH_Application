@@ -3,6 +3,7 @@ package se.ESNBTH.esnbth.Fragments;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
 import android.net.Uri;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -35,6 +37,7 @@ import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -76,10 +79,10 @@ public class Fragment_Home extends Fragment {
 
     public Fragment_Home(){}
 
-    //TODO: If the event list is empty create an input with a text "NO EVENTS YET"
-    //TODO: Add a since so the event list just show future events.
-    //TODO: Create a new layout for showing single events
-    //TODO: Create a new fragment for showing single events
+
+
+
+
     //TODO: Create a new fragment and layout for showing all the events future and past
 
 
@@ -125,12 +128,30 @@ public class Fragment_Home extends Fragment {
                     transaction.commit();
 
 
-                   /* fragmentManager = getFragmentManager();
-                    fragment = new Fragment_Karlskrona();
-                    fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();*/
+
                     return true;
                 }
                 return true;
+            }
+        });
+
+        eventList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                //We get the event by position.
+                Event item = events.get(position);
+                //Create the fragment
+                Fragment_SingleEvent newFragment = new Fragment_SingleEvent();
+                //Put the data into a bundle to send it to the fragment
+                Bundle bundle = new Bundle();
+                bundle.putParcelable(AppConst.EVENT_KEY,item);
+                newFragment.setArguments(bundle);
+                //Change the fragment
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_container,newFragment);
+                transaction.commit();
+
             }
         });
 
@@ -202,36 +223,10 @@ public class Fragment_Home extends Fragment {
                 }
             });*/
         } else if (state.isClosed()) {
+            //TODO: Intent to Splash screen
             btnAboutUs.setVisibility(View.INVISIBLE);
 
         }
-    }
-
-    private void doBatchRequest() {
-
-        String[] requestIds = {"me", "1390607591232311"};
-
-        RequestBatch requestBatch = new RequestBatch();
-        for (final String requestId : requestIds) {
-            requestBatch.add(new Request(Session.getActiveSession(),
-                    requestId, null, null, new Request.Callback() {
-                public void onCompleted(Response response) {
-                    GraphObject graphObject = response.getGraphObject();
-                    String s = btnAboutUs.getText().toString();
-                    if (graphObject != null) {
-                        if (graphObject.getProperty("id") != null) {
-                            s = s + String.format("%s: %s\n",
-                                    graphObject.getProperty("id"),
-                                    graphObject.getProperty("name"));
-                        }
-                    }
-                    btnAboutUs.setText(s);
-                }
-            }));
-        }
-        requestBatch.executeAsync();
-
-
     }
 
     /**
@@ -281,7 +276,6 @@ public class Fragment_Home extends Fragment {
                 batchRequestEvents(events);
 
 
-                //TODO:SET ADAPTER FOR THE LISTVIEW
             }
         }).executeAsync();
 
@@ -353,9 +347,15 @@ public class Fragment_Home extends Fragment {
      */
     private void requestFurtherWeekEvents(){
         String EVENTS = "events";
+        Date date = Calendar.getInstance().getTime();
+        String since = String.valueOf(date.getTime()).substring(0,10);
+
         Bundle bun = new Bundle();
         bun.putString("fields","id");
+        //bun.putString("since",since);
         bun.putInt("limit",100);
+
+
         //PAGEID/Events
         String requestStuff = AppConst.Facebook_PageName+EVENTS;
         new Request(Session.getActiveSession(),requestStuff,bun, HttpMethod.GET, new Request.Callback() {
@@ -365,7 +365,7 @@ public class Fragment_Home extends Fragment {
                 events = new ArrayList<>();
                 GraphObject jRequest = response.getGraphObject();
                 JSONArray jEvents = (JSONArray) jRequest.getProperty("data");
-                if (jEvents != null) {
+                if (jEvents != null && jEvents.length() > 0) {
                     for (int i = 0; i < jEvents.length(); i++) {
                         JSONObject item = null;
                         try {
@@ -384,12 +384,18 @@ public class Fragment_Home extends Fragment {
                             e.printStackTrace();
                         }
                     }
+                    //Get Information of events
+                    batchRequestEvents(events);
+                }else{
+                    Event event = new Event();
+                    event.setName("");
+                    event.setLocation("");
+                    event.setStartTime("Coming Soon");
+                    event.setImgUrl("http://www.ofallonfamilyeyecare.com/wp-content/uploads/2014/02/coming_soon.png");
+                    events.add(event);
+                    eventAdapter.swapItems(events);
+                    eventList.setClickable(false);
                 }
-
-                //Get the data of the events
-                //batchRequestImages(events);
-                //Get the Images of the events
-                batchRequestEvents(events);
 
 
             }

@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ import se.ESNBTH.esnbth.Fragments.Fragment_Timetables;
 import se.ESNBTH.esnbth.NavigationDrawer.NavDrawerItem;
 import se.ESNBTH.esnbth.NavigationDrawer.NavDrawerListAdapter;
 import se.ESNBTH.esnbth.R;
+import se.ESNBTH.esnbth.RequestHelper.AppConst;
 
 
 public class MainLayActivity extends ActionBarActivity {
@@ -56,12 +58,20 @@ public class MainLayActivity extends ActionBarActivity {
     public Fragment fragment;
     public static int previousFragment = 0;
 
+    SharedPreferences preferences;
+
+
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_layout);
+
+        preferences = getSharedPreferences(AppConst.PREFERENCE_KEY, MODE_PRIVATE);
+
+
 
 
 
@@ -301,5 +311,7 @@ public class MainLayActivity extends ActionBarActivity {
             previousFragment = 1;
         }
     }
+
+
 
 }

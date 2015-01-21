@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/singleEName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="Event Title"
+        style="@style/Titulo" />
+    <com.github.siyamed.shapeimageview.RoundedImageView
+        android:id="@+id/eventImg"
+        android:layout_width="fill_parent"
+        android:layout_height="150dp"
+        android:layout_below="@+id/singleEName"
+        app:siRadius="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="@dimen/activity_vertical_margin_small"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+
+
+    <LinearLayout
+        android:id="@+id/container_events"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/eventImg">
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/blue" />
+
+        <TextView
+            android:id="@+id/eventDescriptionTitle"
+            style="@style/Subtitle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Subtitle"
+            android:clickable="true"
+            android:text="@string/description_txt" />
+
+        <TextView
+            android:id="@+id/singleEventDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Body"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
+            android:visibility="gone" />
+
+
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/blue" />
+
+        <TextView
+            android:id="@+id/eventTimeTitle"
+            style="@style/Subtitle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Subtitle"
+            android:clickable="true"
+            android:text="@string/time_txt" />
+
+        <TextView
+            android:id="@+id/singleEventTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Body"
+            android:layout_marginLeft="30dp"
+            android:text="Test"
+            android:layout_marginStart="30dp"/>
+
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/blue" />
+
+        <TextView
+            android:id="@+id/eventPlaceTitle"
+            style="@style/Subtitle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Subtitle"
+            android:clickable="true"
+            android:text="@string/location_txt" />
+
+        <TextView
+            android:id="@+id/singleEventPlace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Body"
+            android:layout_marginLeft="30dp"
+            android:text="Test"
+            android:layout_marginStart="30dp"/>
+
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/blue" />
+
+        </LinearLayout>
+
+
+</RelativeLayout>

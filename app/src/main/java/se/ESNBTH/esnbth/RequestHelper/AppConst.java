@@ -1,5 +1,10 @@
 package se.ESNBTH.esnbth.RequestHelper;
 
+import android.content.Context;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -7,6 +12,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+
+import se.ESNBTH.esnbth.R;
 
 /**
  * Created by Julio on 08/01/2015.
@@ -16,6 +23,9 @@ public class AppConst {
     public static final String Facebook_PageName = "EsnBth/";
 
 
+    //KEY FOR SHARED PREFERENCES
+    public static final String PREFERENCE_KEY = "prefkey";
+    public static final String EVENT_KEY = "event";
 
     //KEYS FOR EVENTS REQUEST
     public static final String ID_KEY = "id";
@@ -45,6 +55,8 @@ public class AppConst {
         return result;
     }
 
+
+
     public static ArrayList<Event> mergeAllInfoEvents(List<Event> original, ArrayList<Event> events1){
         ArrayList<Event> result = new ArrayList<>();
 
@@ -67,5 +79,27 @@ public class AppConst {
         }
 
         return result;
+    }
+
+    public static void slide_down(Context context, View v) {
+        Animation a = AnimationUtils.loadAnimation(context, R.anim.slide_down);
+        if (a != null) {
+            a.reset();
+            if (v != null) {
+                v.clearAnimation();
+                v.startAnimation(a);
+            }
+        }
+    }
+
+    public static void slide_up(Context context, View v) {
+        Animation a = AnimationUtils.loadAnimation(context, R.anim.slide_up);
+        if (a != null) {
+            a.reset();
+            if (v != null) {
+                v.clearAnimation();
+                v.startAnimation(a);
+            }
+        }
     }
 }

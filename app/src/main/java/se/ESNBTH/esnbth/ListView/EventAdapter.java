@@ -9,19 +9,12 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.NetworkImageView;
-import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Transformation;
 
 import java.util.List;
 
 import se.ESNBTH.esnbth.R;
-import se.ESNBTH.esnbth.RequestHelper.AppController;
 import se.ESNBTH.esnbth.RequestHelper.Event;
-import se.ESNBTH.esnbth.RequestHelper.LruBitmapCache;
-
 
 
 /**

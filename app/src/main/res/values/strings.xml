@@ -18,6 +18,12 @@
     </string-array>
 
 
+    <!-- SINGLE EVENTS STRINGS -->
+    <string name="description_txt">Description</string>
+    <string name="location_txt">Location</string>
+    <string name="time_txt">Starting Time</string>
+
+
     <!-- Nav Drawer List Item Icons -->
     <!-- Keep them in order as the titles are in -->
     <array name="nav_drawer_icons">

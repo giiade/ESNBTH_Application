@@ -1,11 +1,15 @@
 package se.ESNBTH.esnbth.RequestHelper;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Julio on 08/01/2015.
  */
-public class Event {
+public class Event implements Parcelable {
     private String id;
     private String name;
     private String description;
@@ -22,6 +26,15 @@ public class Event {
         this.location=event.getLocation();
         this.startTime=event.getStartTime();
         this.imgUrl=event.getImgUrl();
+    }
+
+    public Event(Parcel source){
+        this.id = source.readString();
+        this.name=source.readString();
+        this.description=source.readString();
+        this.location=source.readString();
+        this.startTime=source.readString();
+        this.imgUrl=source.readString();
     }
 
     public String getId() {
@@ -85,5 +98,21 @@ public class Event {
         result.setStartTime(event1.getStartTime());
 
         return result;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(getId());
+        dest.writeString(getName());
+        dest.writeString(getDescription());
+        dest.writeString(getLocation());
+        dest.writeString(getStartTime());
+        dest.writeString(getImgUrl());
+
     }
 }
