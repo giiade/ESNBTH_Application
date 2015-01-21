@@ -104,38 +104,38 @@ public class Fragment_DetailTimetable extends Fragment {
         int day = calendar.get(Calendar.DAY_OF_WEEK);
 
         if(day == 1){
-            sunday.setTextColor(Color.parseColor("#16A5D7"));
-            sundayTime.setTextColor(Color.parseColor("#16A5D7"));
+            sunday.setTextColor(Color.parseColor("#F47820"));
+            sundayTime.setTextColor(Color.parseColor("#F47820"));
         }
 
         if(day == 2){
-            monday.setTextColor(Color.parseColor("#16A5D7"));
-            mondayTime.setTextColor(Color.parseColor("#16A5D7"));
+            monday.setTextColor(Color.parseColor("#F47820"));
+            mondayTime.setTextColor(Color.parseColor("#F47820"));
         }
 
         if(day == 3){
-            tuesday.setTextColor(Color.parseColor("#16A5D7"));
-            tuesdayTime.setTextColor(Color.parseColor("#16A5D7"));
+            tuesday.setTextColor(Color.parseColor("#F47820"));
+            tuesdayTime.setTextColor(Color.parseColor("#F47820"));
         }
 
         if(day == 4){
-            wednesday.setTextColor(Color.parseColor("#16A5D7"));
-            wednesdayTime.setTextColor(Color.parseColor("#16A5D7"));
+            wednesday.setTextColor(Color.parseColor("#F47820"));
+            wednesdayTime.setTextColor(Color.parseColor("#F47820"));
         }
 
         if(day == 5){
-            thursday.setTextColor(Color.parseColor("#16A5D7"));
-            thursdayTime.setTextColor(Color.parseColor("#16A5D7"));
+            thursday.setTextColor(Color.parseColor("#F47820"));
+            thursdayTime.setTextColor(Color.parseColor("#F47820"));
         }
 
         if(day == 6){
-            friday.setTextColor(Color.parseColor("#16A5D7"));
-            fridayTime.setTextColor(Color.parseColor("#16A5D7"));
+            friday.setTextColor(Color.parseColor("#F47820"));
+            fridayTime.setTextColor(Color.parseColor("#F47820"));
         }
 
         if(day == 7){
-            saturday.setTextColor(Color.parseColor("#16A5D7"));
-            saturdayTime.setTextColor(Color.parseColor("#16A5D7"));
+            saturday.setTextColor(Color.parseColor("#F47820"));
+            saturdayTime.setTextColor(Color.parseColor("#F47820"));
         }
 
         // BIND POSITION

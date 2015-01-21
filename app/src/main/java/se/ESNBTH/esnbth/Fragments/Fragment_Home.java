@@ -135,6 +135,25 @@ public class Fragment_Home extends Fragment {
             }
         });
 
+        btnVisitUs.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch (View v, MotionEvent event){
+
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+
+                    String url = "https://www.facebook.com/EsnBth?fref=ts";
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse(url));
+                    startActivity(i);
+
+                    return true;
+                }
+                return true;
+            }
+        });
+
+
+
         eventList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
