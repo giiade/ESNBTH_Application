@@ -36,9 +36,10 @@ public class Fragment_Timetables extends Fragment implements AdapterView.OnItemC
     String[] localisation;
     String[] openClosed;
     TextView openClosedText;
+    public static int selection;
 
     List<RowItem> rowItems;
-    ListView mylistview;
+    public static ListView mylistview;
     CustomAdapter adapter;
 
     private Fragment fragment;
@@ -77,6 +78,7 @@ public class Fragment_Timetables extends Fragment implements AdapterView.OnItemC
         adapter = new CustomAdapter(getActivity().getApplicationContext(), rowItems);
 
         mylistview.setAdapter(adapter);
+        mylistview.setSelection(selection);
         shop_pics.recycle();
         mylistview.setOnItemClickListener(this);
 
@@ -85,6 +87,7 @@ public class Fragment_Timetables extends Fragment implements AdapterView.OnItemC
 
         return rootView;
     }
+
 
 
 

@@ -25,6 +25,7 @@ import com.facebook.Session;
 
 import java.util.ArrayList;
 
+import se.ESNBTH.esnbth.Fragments.Fragment_DetailTimetable;
 import se.ESNBTH.esnbth.Fragments.Fragment_Home;
 import se.ESNBTH.esnbth.Fragments.Fragment_Karlskrona;
 import se.ESNBTH.esnbth.Fragments.Fragment_Timetables;
@@ -95,9 +96,9 @@ public class MainLayActivity extends ActionBarActivity {
         navDrawerItems = new ArrayList<NavDrawerItem>();
 
         // adding nav drawer items to array
-        navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons.getResourceId(0, -1)));
-        navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1)));
-
+        for(int h = 0; h < 3; h++) {
+            navDrawerItems.add(new NavDrawerItem(navMenuTitles[h], navMenuIcons.getResourceId(h, -1)));
+        }
 
         // Recycle the typed array
         navMenuIcons.recycle();
@@ -223,6 +224,12 @@ public class MainLayActivity extends ActionBarActivity {
                 fragment = new Fragment_Karlskrona();
                 break;
 
+            case 2:
+                //UPDATE LIST VIEW
+                Fragment_Timetables.selection = 0;
+                fragment = new Fragment_Timetables();
+                break;
+
 
             default:
                 break;
@@ -290,14 +297,16 @@ public class MainLayActivity extends ActionBarActivity {
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();
 
-            /*mDrawerList.setItemChecked(0, true);
+            mDrawerList.setItemChecked(0, true);
             mDrawerList.setSelection(0);
             setTitle(navMenuTitles[0]);
             mDrawerLayout.closeDrawer(mDrawerList);
-            getFragmentManager().popBackStack();*/
+            getFragmentManager().popBackStack();
         }
 
         else if(previousFragment == 1){
+
+
             fragment = new Fragment_Karlskrona();
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();
@@ -305,6 +314,9 @@ public class MainLayActivity extends ActionBarActivity {
         }
 
         else if(previousFragment == 2){
+            //UPDATE LIST VIEW
+            Fragment_Timetables.selection = Fragment_DetailTimetable.listPos;
+
             fragment = new Fragment_Timetables();
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();

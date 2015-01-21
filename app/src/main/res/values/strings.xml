@@ -13,8 +13,9 @@
     <string name="title_activity_esn_inf">EsnInf</string>
 
     <string-array name="nav_drawer_items">
-        <item>Accueil</item>
+        <item>Home</item>
         <item>Karlskrona</item>
+        <item>Timetable</item>
     </string-array>
 
 
@@ -27,8 +28,9 @@
     <!-- Nav Drawer List Item Icons -->
     <!-- Keep them in order as the titles are in -->
     <array name="nav_drawer_icons">
+        <item>@drawable/ic_launcher</item>
         <item>@drawable/ic_everyday</item>
-        <item>@drawable/ic_world</item>
+        <item>@drawable/ic_timetable</item>
     </array>
 
     <!-- Content Description -->

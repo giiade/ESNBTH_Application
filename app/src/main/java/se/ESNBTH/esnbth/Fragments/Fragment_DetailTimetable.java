@@ -28,6 +28,7 @@ public class Fragment_DetailTimetable extends Fragment {
 
     private static int Image;
     private static String Localisation;
+    public static int listPos;
 
     private TextView detailName;
     private ImageView detailPic;
@@ -59,6 +60,7 @@ public class Fragment_DetailTimetable extends Fragment {
         args.putInt("pos", position);
         myFragment.setArguments(args);
 
+        listPos = position;
         Image = shopPic;
         Localisation = shopLocalisation;
 

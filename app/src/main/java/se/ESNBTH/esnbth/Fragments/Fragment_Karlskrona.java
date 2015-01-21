@@ -27,6 +27,9 @@ public class Fragment_Karlskrona extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_karlskrona, container, false);
 
+        //UPDATE LIST VIEW
+        Fragment_Timetables.selection = 0;
+
         btnTimetable = (Button) rootView.findViewById(R.id.btnTimetable);
 
         btnTimetable.setOnTouchListener(new View.OnTouchListener() {
