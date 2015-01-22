@@ -14,8 +14,11 @@
 
     <string-array name="nav_drawer_items">
         <item>Home</item>
+        <item>News</item>
+        <item>Events</item>
         <item>Karlskrona</item>
         <item>Timetable</item>
+        <item>About Us</item>
     </string-array>
 
     <!-- NEWS STRINGS -->
@@ -29,9 +32,12 @@
     <!-- Nav Drawer List Item Icons -->
     <!-- Keep them in order as the titles are in -->
     <array name="nav_drawer_icons">
-        <item>@drawable/ic_launcher</item>
+        <item>@drawable/ic_home2</item>
+        <item>@drawable/ic_news</item>
+        <item>@drawable/ic_event</item>
         <item>@drawable/ic_everyday</item>
         <item>@drawable/ic_timetable</item>
+        <item>@drawable/ic_launcher</item>
     </array>
 
     <!-- Content Description -->

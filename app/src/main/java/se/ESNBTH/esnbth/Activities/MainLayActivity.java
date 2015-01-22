@@ -25,10 +25,13 @@ import com.facebook.Session;
 
 import java.util.ArrayList;
 
+import se.ESNBTH.esnbth.Fragments.Fragment_AboutESN;
 import se.ESNBTH.esnbth.Fragments.Fragment_DetailTimetable;
 import se.ESNBTH.esnbth.Fragments.Fragment_Home;
 import se.ESNBTH.esnbth.Fragments.Fragment_Karlskrona;
+import se.ESNBTH.esnbth.Fragments.Fragment_SingleEvent;
 import se.ESNBTH.esnbth.Fragments.Fragment_Timetables;
+import se.ESNBTH.esnbth.Fragments.Fragment_news;
 import se.ESNBTH.esnbth.NavigationDrawer.NavDrawerItem;
 import se.ESNBTH.esnbth.NavigationDrawer.NavDrawerListAdapter;
 import se.ESNBTH.esnbth.R;
@@ -96,7 +99,7 @@ public class MainLayActivity extends ActionBarActivity {
         navDrawerItems = new ArrayList<NavDrawerItem>();
 
         // adding nav drawer items to array
-        for(int h = 0; h < 3; h++) {
+        for(int h = 0; h < 6; h++) {
             navDrawerItems.add(new NavDrawerItem(navMenuTitles[h], navMenuIcons.getResourceId(h, -1)));
         }
 
@@ -218,16 +221,38 @@ public class MainLayActivity extends ActionBarActivity {
         fragment = null;
         switch (position) {
             case 0:
+                //UPDATE LIST VIEW
+                Fragment_Timetables.selection = 0;
                 fragment = new Fragment_Home();
                 break;
             case 1:
-                fragment = new Fragment_Karlskrona();
+                //UPDATE LIST VIEW
+                Fragment_Timetables.selection = 0;
+                fragment = new Fragment_news();
                 break;
 
             case 2:
                 //UPDATE LIST VIEW
                 Fragment_Timetables.selection = 0;
+                fragment = new Fragment_SingleEvent();
+                break;
+
+            case 3:
+                //UPDATE LIST VIEW
+                Fragment_Timetables.selection = 0;
+                fragment = new Fragment_Karlskrona();
+                break;
+
+            case 4:
+                //UPDATE LIST VIEW
+                Fragment_Timetables.selection = 0;
                 fragment = new Fragment_Timetables();
+                break;
+
+            case 5:
+                //UPDATE LIST VIEW
+                Fragment_Timetables.selection = 0;
+                fragment = new Fragment_AboutESN();
                 break;
 
 
@@ -282,6 +307,19 @@ public class MainLayActivity extends ActionBarActivity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.list_slidermenu);
 
+        if(previousFragment == 0){
+            mDrawerList.setItemChecked(3, true);
+            mDrawerList.setSelection(3);
+            mDrawerLayout.closeDrawer(mDrawerList);
+            getFragmentManager().popBackStack();
+        }
+        else if(previousFragment == 1){
+            mDrawerList.setItemChecked(4, true);
+            mDrawerList.setSelection(4);
+            mDrawerLayout.closeDrawer(mDrawerList);
+            getFragmentManager().popBackStack();
+        }
+
         if (mDrawerLayout.isDrawerOpen(mDrawerList) ||
                 mDrawerLayout.isDrawerVisible(mDrawerList)) {
             return true;
@@ -299,7 +337,6 @@ public class MainLayActivity extends ActionBarActivity {
 
             mDrawerList.setItemChecked(0, true);
             mDrawerList.setSelection(0);
-            setTitle(navMenuTitles[0]);
             mDrawerLayout.closeDrawer(mDrawerList);
             getFragmentManager().popBackStack();
         }
@@ -311,6 +348,11 @@ public class MainLayActivity extends ActionBarActivity {
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();
             previousFragment = 0;
+
+            mDrawerList.setItemChecked(3, true);
+            mDrawerList.setSelection(3);
+            mDrawerLayout.closeDrawer(mDrawerList);
+            getFragmentManager().popBackStack();
         }
 
         else if(previousFragment == 2){
@@ -321,6 +363,11 @@ public class MainLayActivity extends ActionBarActivity {
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();
             previousFragment = 1;
+
+            mDrawerList.setItemChecked(4, true);
+            mDrawerList.setSelection(4);
+            mDrawerLayout.closeDrawer(mDrawerList);
+            getFragmentManager().popBackStack();
         }
     }
 
