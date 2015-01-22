@@ -60,7 +60,6 @@ public class Fragment_Home extends Fragment {
     private Fragment fragment;
     private FragmentManager fragmentManager;
     private List<Event> events = new ArrayList<>(); //Here we will save events.
-    private int cont;
     private ArrayList<Event> imgEvents = new ArrayList<>();
     private ArrayList<Event> infoEvents = new ArrayList<>();
 
@@ -112,6 +111,18 @@ public class Fragment_Home extends Fragment {
         btnVisitUs = (Button) rootView.findViewById(R.id.btnVisitUs);
 
 
+        btnNews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment_news newFragment = new Fragment_news();
+
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_container,newFragment);
+                transaction.commit();
+            }
+        });
+
+
 
 
         btnAboutKarlskrona.setOnTouchListener(new View.OnTouchListener() {
@@ -123,7 +134,6 @@ public class Fragment_Home extends Fragment {
                     Fragment_Karlskrona newFragment = new Fragment_Karlskrona();
 
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
-
                     transaction.replace(R.id.frame_container, newFragment);
                     transaction.commit();
 
@@ -371,49 +381,54 @@ public class Fragment_Home extends Fragment {
 
         Bundle bun = new Bundle();
         bun.putString("fields","id");
-        //bun.putString("since",since);
+        bun.putString("since",since);
         bun.putInt("limit",100);
 
 
         //PAGEID/Events
+        //TODO: ARREGLAR INTERNET
         String requestStuff = AppConst.Facebook_PageName+EVENTS;
         new Request(Session.getActiveSession(),requestStuff,bun, HttpMethod.GET, new Request.Callback() {
             @Override
             public void onCompleted(Response response) {
                 Log.i(TAG,response.toString());
-                events = new ArrayList<>();
-                GraphObject jRequest = response.getGraphObject();
-                JSONArray jEvents = (JSONArray) jRequest.getProperty("data");
-                if (jEvents != null && jEvents.length() > 0) {
-                    for (int i = 0; i < jEvents.length(); i++) {
-                        JSONObject item = null;
-                        try {
-                            item = (JSONObject) jEvents.get(i);
-                            Event event = new Event();
-                            event.setId(item.getString(AppConst.ID_KEY));
-                            //event.setName(item.getString(AppConst.NAME_KEY));
-                            //event.setDescription(item.getString(AppConst.DESCRIPTION_KEY));
-                            //event.setLocation(item.getString(AppConst.DESCRIPTION_KEY));
-                            //event.setStartTime(item.getString(AppConst.START_TIME_KEY));
+                if(response != null) {
+                    events = new ArrayList<>();
+                    GraphObject jRequest = response.getGraphObject();
+                    JSONArray jEvents = (JSONArray) jRequest.getProperty("data");
+                    if (jEvents != null && jEvents.length() > 0) {
+                        for (int i = 0; i < jEvents.length(); i++) {
+                            JSONObject item = null;
+                            try {
+                                item = (JSONObject) jEvents.get(i);
+                                Event event = new Event();
+                                event.setId(item.getString(AppConst.ID_KEY));
+                                //event.setName(item.getString(AppConst.NAME_KEY));
+                                //event.setDescription(item.getString(AppConst.DESCRIPTION_KEY));
+                                //event.setLocation(item.getString(AppConst.DESCRIPTION_KEY));
+                                //event.setStartTime(item.getString(AppConst.START_TIME_KEY));
 
-                            String message = (String) item.get("id");
-                            Log.i(TAG + ".ITEM " + i, message);
-                            events.add(event);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                                String message = (String) item.get("id");
+                                Log.i(TAG + ".ITEM " + i, message);
+                                events.add(event);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
+                        //Get Information of events
+                        batchRequestEvents(events);
+                    } else {
+                        Event event = new Event();
+                        event.setName("");
+                        event.setLocation("");
+                        event.setStartTime("Coming Soon");
+                        event.setImgUrl("http://www.ofallonfamilyeyecare.com/wp-content/uploads/2014/02/coming_soon.png");
+                        events.add(event);
+                        eventAdapter.swapItems(events);
+                        eventList.setClickable(false);
+                        eventList.setFocusable(false);
+                        eventList.setEnabled(false);
                     }
-                    //Get Information of events
-                    batchRequestEvents(events);
-                }else{
-                    Event event = new Event();
-                    event.setName("");
-                    event.setLocation("");
-                    event.setStartTime("Coming Soon");
-                    event.setImgUrl("http://www.ofallonfamilyeyecare.com/wp-content/uploads/2014/02/coming_soon.png");
-                    events.add(event);
-                    eventAdapter.swapItems(events);
-                    eventList.setClickable(false);
                 }
 
 

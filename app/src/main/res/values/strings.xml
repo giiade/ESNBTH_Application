@@ -18,12 +18,13 @@
         <item>Timetable</item>
     </string-array>
 
+    <!-- NEWS STRINGS -->
+    <string name="news_txt">News</string>
 
     <!-- SINGLE EVENTS STRINGS -->
     <string name="description_txt">Description</string>
     <string name="location_txt">Location</string>
     <string name="time_txt">Starting Time</string>
-
 
     <!-- Nav Drawer List Item Icons -->
     <!-- Keep them in order as the titles are in -->
@@ -36,14 +37,11 @@
     <!-- Content Description -->
     <string name="desc_list_item_icon">Item Icon</string>
 
-    <!-- Karlskrona Content-->
-    <string name="karlskronaDescription">
-        Karlskrona can proudly name itself \"Sweden\'s sunniest city\".
+    <!-- Karlskrona Content -->
+    <string name="karlskronaDescription">        Karlskrona can proudly name itself \"Sweden\'s sunniest city\".
         It\'s not just the sun that every year attracts more visitors.
         Karlskrona is a world heritage city with wonderful outdoor experiences,
-        pleasant shopping, cool events and great places to visit.
-    </string>
-
+        pleasant shopping, cool events and great places to visit.</string>
     <string name="karlskronaWelcome">Welcome to Karlskrona, in the middle of the archipelago!</string>
 
     <!-- Shop Names -->
@@ -112,4 +110,6 @@
 
     <!-- Facebook Strings -->
     <string name="facebook_app_id">324146637774895</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

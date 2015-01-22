@@ -11,9 +11,11 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.Calendar;
 import java.util.List;
 
 import se.ESNBTH.esnbth.R;
+import se.ESNBTH.esnbth.RequestHelper.AppConst;
 import se.ESNBTH.esnbth.RequestHelper.Event;
 
 
@@ -89,7 +91,14 @@ public class EventAdapter extends BaseAdapter {
         title.setText(e.getName());
 
         //Day
-        day.setText(e.getStartTime());
+        String date = e.getStartTime();
+        if (!date.contains("C")){
+            Calendar cal = AppConst.StrtoDate(date);
+            day.setText(AppConst.GetDate(cal) + " " + AppConst.GetTime(cal));
+        }else{
+            day.setText(date);
+        }
+
 
         //Place
         place.setText(e.getLocation());

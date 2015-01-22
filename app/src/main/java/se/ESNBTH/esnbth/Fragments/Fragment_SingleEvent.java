@@ -8,10 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.Calendar;
 import java.util.Random;
 import java.util.concurrent.TimeoutException;
 
@@ -26,8 +28,9 @@ public class Fragment_SingleEvent extends Fragment {
 
     public Fragment_SingleEvent(){};
 
-    private TextView titleTxt, descriptionTxt, descriptionTitle, timeTxt, placeTxt,timeTitle,placeTitle;
+    private TextView titleTxt, descriptionTxt, descriptionTitle, timeTxt, placeTxt,timeTitle,placeTitle, textControler;
     private ImageView eventImage;
+    RelativeLayout relativeLyt;
 
 
     @Override
@@ -39,7 +42,7 @@ public class Fragment_SingleEvent extends Fragment {
 
         Resources color = getResources();
 
-        int[] colorIds = {R.color.ESNDarkBlue,R.color.blue, R.color.ESNGreen,R.color.ESNOrange,R.color.ESNPink};
+        int[] colorIds = {R.color.blue, R.color.ESNGreen,R.color.ESNOrange,R.color.ESNPink};
         int colorPos = (int) (Math.random()*colorIds.length);
 
 
@@ -52,6 +55,9 @@ public class Fragment_SingleEvent extends Fragment {
         timeTxt = (TextView) rootView.findViewById(R.id.singleEventTime);
         placeTitle = (TextView) rootView.findViewById(R.id.eventPlaceTitle);
         placeTxt = (TextView) rootView.findViewById(R.id.singleEventPlace);
+        textControler = (TextView) rootView.findViewById(R.id.textControler_description);
+
+        relativeLyt = (RelativeLayout) rootView.findViewById(R.id.eventDescriptionTitleCnt);
 
         //Pass data to the layout items.
         titleTxt.setText(event.getName());
@@ -64,21 +70,31 @@ public class Fragment_SingleEvent extends Fragment {
                 .fit()
                 .into(eventImage);
         timeTitle.setTextColor(color.getColor(colorIds[colorPos]));
-        timeTxt.setText(event.getStartTime());
+
+        String date = event.getStartTime();
+        Calendar cal = AppConst.StrtoDate(date);
+
+        StringBuilder str = new StringBuilder();
+        str.append("Date: " +  AppConst.GetDate(cal) + "\n");
+        str.append("Time: " + AppConst.GetTime(cal));
+
+        timeTxt.setText(str.toString());
         placeTitle.setTextColor(color.getColor(colorIds[colorPos]));
         placeTxt.setText(event.getLocation());
 
 
 
-        descriptionTitle.setOnClickListener(new View.OnClickListener() {
+        relativeLyt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (descriptionTxt.isShown()) {
                     AppConst.slide_up(getActivity().getApplicationContext(), descriptionTxt);
                     descriptionTxt.setVisibility(View.GONE);
+                    textControler.setText("More...");
                 } else {
                     AppConst.slide_down(getActivity().getApplicationContext(), descriptionTxt);
                     descriptionTxt.setVisibility(View.VISIBLE);
+                    textControler.setText("Less...");
                 }
             }
         });

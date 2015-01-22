@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -34,6 +35,11 @@ public class AppConst {
     public static final String LOCATION_KEY = "location";
     public static final String START_TIME_KEY = "start_time";
     public static final String IMAGE_SOURCE_KEY = "source";
+
+    //KEYS FOR FEED REQUEST
+    public static final String DATA_KEY = "data";
+    public static final String MSG_KEY = "message";
+
 
     /**
      * Will give us the equivalent to srtToTime for using it in the request.
@@ -101,5 +107,34 @@ public class AppConst {
                 v.startAnimation(a);
             }
         }
+    }
+
+    public static Calendar StrtoDate (String dateFormat){
+        String template = "yyyy-MM-dd'T'hh:mm:ss";
+        DateFormat format = new SimpleDateFormat(template);
+        Date date;
+        try {
+             date = format.parse(dateFormat);
+        } catch (ParseException e) {
+            throw new RuntimeException("Can't parse " + dateFormat + " as date");
+        }
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+
+        return cal;
+    }
+
+    public static String GetDate (Calendar cal){
+        String result = "";
+        DateFormat format = new SimpleDateFormat("EEEE' 'd' 'MMMM");
+        result = format.format(cal.getTime());
+        return result;
+    }
+
+    public static String GetTime (Calendar cal){
+        String result = "";
+        DateFormat format = new SimpleDateFormat("hh:mm' 'aa");
+        result = format.format(cal.getTime());
+        return result;
     }
 }

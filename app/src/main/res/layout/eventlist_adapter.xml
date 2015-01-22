@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/gray_light"
         android:text="DAY"
-        android:textSize="16sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         android:layout_toRightOf="@+id/imgAdapter"
         android:layout_below="@+id/titleTxt_adapter"

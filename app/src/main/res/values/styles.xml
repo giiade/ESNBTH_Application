@@ -7,14 +7,14 @@
 
     <style name="Titulo" parent="@android:style/TextAppearance.Large">
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/ESNGreen</item>
-        <item name="android:textSize">25sp</item>
+        <item name="android:textSize">26sp</item>
     </style>
+
+    <!-- <item name="android:textColor">@color/ESNGreen</item> -->
 
     <style name="Subtitle" parent="@android:style/TextAppearance.Medium">
         <item name="android:textColor">@color/ESNGreen</item>
         <item name="android:textSize">22sp</item>
-        <item name="android:typeface">monospace</item>
         <item name="android:layout_marginLeft">20dp</item>
     </style>
 
