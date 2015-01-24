@@ -40,6 +40,11 @@ public class AppConst {
     public static final String DATA_KEY = "data";
     public static final String MSG_KEY = "message";
 
+    //For NoSql
+    public static final String FEVENTSQL_KEY = "futureEvents";
+    public static final String EVENTSQL_KEY = "events";
+    public static final String FEEDSQL_KEY = "feed";
+
 
     /**
      * Will give us the equivalent to srtToTime for using it in the request.
@@ -66,7 +71,7 @@ public class AppConst {
     public static ArrayList<Event> mergeAllInfoEvents(List<Event> original, ArrayList<Event> events1){
         ArrayList<Event> result = new ArrayList<>();
 
-        for(int i = 0; i < events1.size();i++){
+        for(int i = 0; i < original.size();i++){
             Event event =  new Event(original.get(i));
            event = event.mergeInfoEvents(events1.get(i));
             result.add(event);
@@ -115,6 +120,21 @@ public class AppConst {
         Date date;
         try {
              date = format.parse(dateFormat);
+        } catch (ParseException e) {
+            throw new RuntimeException("Can't parse " + dateFormat + " as date");
+        }
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+
+        return cal;
+    }
+
+    public static Calendar StrtoDateLite (String dateFormat){
+        String template = "yyyy-MM-dd";
+        DateFormat format = new SimpleDateFormat(template);
+        Date date;
+        try {
+            date = format.parse(dateFormat);
         } catch (ParseException e) {
             throw new RuntimeException("Can't parse " + dateFormat + " as date");
         }

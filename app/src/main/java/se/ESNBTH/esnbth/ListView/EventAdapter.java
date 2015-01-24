@@ -93,8 +93,13 @@ public class EventAdapter extends BaseAdapter {
         //Day
         String date = e.getStartTime();
         if (!date.contains("C")){
-            Calendar cal = AppConst.StrtoDate(date);
-            day.setText(AppConst.GetDate(cal) + " " + AppConst.GetTime(cal));
+            if(date.contains(":")) {
+                Calendar cal = AppConst.StrtoDate(date);
+                day.setText(AppConst.GetDate(cal) + " " + AppConst.GetTime(cal));
+            }else{
+                Calendar cal = AppConst.StrtoDateLite(date);
+                day.setText(AppConst.GetDate(cal));
+            }
         }else{
             day.setText(date);
         }

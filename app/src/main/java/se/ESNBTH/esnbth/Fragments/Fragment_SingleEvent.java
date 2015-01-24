@@ -72,11 +72,20 @@ public class Fragment_SingleEvent extends Fragment {
         timeTitle.setTextColor(color.getColor(colorIds[colorPos]));
 
         String date = event.getStartTime();
-        Calendar cal = AppConst.StrtoDate(date);
+
 
         StringBuilder str = new StringBuilder();
-        str.append("Date: " +  AppConst.GetDate(cal) + "\n");
-        str.append("Time: " + AppConst.GetTime(cal));
+
+        if(date.contains(":")) {
+            Calendar cal = AppConst.StrtoDate(date);
+            str.append("Date: " +  AppConst.GetDate(cal) + "\n");
+            str.append("Time: " + AppConst.GetTime(cal));
+        }else{
+            Calendar cal = AppConst.StrtoDateLite(date);
+            str.append("Date: " +  AppConst.GetDate(cal));
+        }
+
+
 
         timeTxt.setText(str.toString());
         placeTitle.setTextColor(color.getColor(colorIds[colorPos]));

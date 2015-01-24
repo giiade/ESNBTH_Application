@@ -18,34 +18,23 @@
         <activity
             android:name=".Activities.Splash_Screen"
             android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
 
         </activity>
         <activity
             android:name=".Activities.MainLayActivity"
             android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
-        <activity
-            android:name=".Activities.Event_List"
-            android:label="@string/title_activity_event__list"></activity>
-        <activity
-            android:name=".Activities.News_List"
-            android:label="@string/title_activity_news_list"></activity>
 
-        <activity
-            android:name=".Activities.News_Inf"
-            android:label="@string/title_activity_news_inf"></activity>
-        <activity
-            android:name=".Activities.Event_Inf"
-            android:label="@string/title_activity_event_inf"></activity>
-        <activity
-            android:name=".Activities.Esn_Inf"
-            android:label="@string/title_activity_esn_inf"></activity>
+
+        <service android:name=".RequestHelper.UpdateService"
+            android:exported="false"/>
     </application>
 
 </manifest>

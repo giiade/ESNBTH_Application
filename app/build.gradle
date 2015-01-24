@@ -26,4 +26,5 @@ dependencies {
     compile project(':libraries:facebook')
     compile 'com.squareup.picasso:picasso:2.4.0'
     compile 'com.github.siyamed:android-shape-imageview:0.9.+@aar'
+    compile 'com.colintmiller:simplenosql:0.5'
 }

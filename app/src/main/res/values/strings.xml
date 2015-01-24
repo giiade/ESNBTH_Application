@@ -24,6 +24,10 @@
     <!-- NEWS STRINGS -->
     <string name="news_txt">News</string>
 
+
+    <!-- EVENTS STRINGS -->
+    <string name="event_txt">Events</string>
+
     <!-- SINGLE EVENTS STRINGS -->
     <string name="description_txt">Description</string>
     <string name="location_txt">Location</string>

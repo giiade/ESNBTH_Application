@@ -1,10 +1,12 @@
 package se.ESNBTH.esnbth.Activities;
 
 import android.app.ActionBar;
-import android.app.AlertDialog;
+import android.app.AlarmManager;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.DialogInterface;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
@@ -21,9 +23,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.facebook.AppEventsLogger;
-import com.facebook.Session;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import se.ESNBTH.esnbth.Fragments.Fragment_AboutESN;
 import se.ESNBTH.esnbth.Fragments.Fragment_DetailTimetable;
@@ -36,6 +38,7 @@ import se.ESNBTH.esnbth.NavigationDrawer.NavDrawerItem;
 import se.ESNBTH.esnbth.NavigationDrawer.NavDrawerListAdapter;
 import se.ESNBTH.esnbth.R;
 import se.ESNBTH.esnbth.RequestHelper.AppConst;
+import se.ESNBTH.esnbth.RequestHelper.UpdateService;
 
 
 public class MainLayActivity extends ActionBarActivity {
@@ -73,11 +76,22 @@ public class MainLayActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_layout);
 
+        /*
+        * Creates a new Intent to start the RSSPullService
+        * IntentService. Passes a URI in the
+        * Intent's "data" field.
+        */
+
+
+
         preferences = getSharedPreferences(AppConst.PREFERENCE_KEY, MODE_PRIVATE);
 
+        PendingIntent pendingIntent = PendingIntent.getService(getApplicationContext(), 0, new Intent(getApplicationContext(), UpdateService.class), 0);
+        AlarmManager alarmManager = (AlarmManager) getApplicationContext()
+                .getSystemService(Context.ALARM_SERVICE);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, Calendar.getInstance().getTimeInMillis(),AlarmManager.INTERVAL_HALF_HOUR, pendingIntent);
 
-
-
+        startService(new Intent(getApplicationContext(),UpdateService.class));
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.action_bar_layout);

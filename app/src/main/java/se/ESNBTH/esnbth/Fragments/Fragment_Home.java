@@ -16,7 +16,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.colintmiller.simplenosql.NoSQL;
+import com.colintmiller.simplenosql.NoSQLEntity;
+import com.colintmiller.simplenosql.RetrievalCallback;
 import com.facebook.HttpMethod;
 import com.facebook.Request;
 import com.facebook.RequestBatch;
@@ -82,7 +86,7 @@ public class Fragment_Home extends Fragment {
 
 
 
-    //TODO: Create a new fragment and layout for showing all the events future and past
+
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -115,6 +119,17 @@ public class Fragment_Home extends Fragment {
             @Override
             public void onClick(View v) {
                 Fragment_news newFragment = new Fragment_news();
+
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_container,newFragment);
+                transaction.commit();
+            }
+        });
+
+        btnEvents.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment_Events newFragment = new Fragment_Events();
 
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_container,newFragment);
@@ -192,6 +207,7 @@ public class Fragment_Home extends Fragment {
         super.onCreate(savedInstanceState);
         uiHelper = new UiLifecycleHelper(getActivity(), callback);
         uiHelper.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -386,13 +402,13 @@ public class Fragment_Home extends Fragment {
 
 
         //PAGEID/Events
-        //TODO: ARREGLAR INTERNET
+
         String requestStuff = AppConst.Facebook_PageName+EVENTS;
         new Request(Session.getActiveSession(),requestStuff,bun, HttpMethod.GET, new Request.Callback() {
             @Override
             public void onCompleted(Response response) {
                 Log.i(TAG,response.toString());
-                if(response != null) {
+                if(Session.getActiveSession().isOpened()) {
                     events = new ArrayList<>();
                     GraphObject jRequest = response.getGraphObject();
                     JSONArray jEvents = (JSONArray) jRequest.getProperty("data");
@@ -429,6 +445,8 @@ public class Fragment_Home extends Fragment {
                         eventList.setFocusable(false);
                         eventList.setEnabled(false);
                     }
+                }else{
+                    Toast.makeText(getActivity().getApplicationContext(), "No Internet Conecction", Toast.LENGTH_SHORT).show();
                 }
 
 
@@ -512,12 +530,12 @@ public class Fragment_Home extends Fragment {
      * that the event will use.
      * @param eventsArray Contains an array of Events with their IDs
      */
-    private void batchRequestImages(List<Event> eventsArray){
+    private void batchRequestImages(List<Event> eventsArray) {
         final Session session = Session.getActiveSession();
         //Clear the imgEvents
         imgEvents.clear();
 
-        if(session != null && session.isOpened()) {
+        if (session != null && session.isOpened()) {
             //Create a requestBatch
             RequestBatch requestBatch = new RequestBatch();
 
@@ -557,9 +575,12 @@ public class Fragment_Home extends Fragment {
             requestBatch.addCallback(new RequestBatch.Callback() {
                 @Override
                 public void onBatchCompleted(RequestBatch batch) {
-                    events = AppConst.mergeAllImgEvents(events,imgEvents);
+                    events = AppConst.mergeAllImgEvents(events, imgEvents);
 
                     Log.i("IMAGE", events.get(0).getImgUrl());
+
+                    //NoSQL.with(getActivity().getApplicationContext()).using(Event.class).save(SqlConverter(events));
+
                     eventAdapter.swapItems(events);
                 }
             });
@@ -567,6 +588,18 @@ public class Fragment_Home extends Fragment {
             requestBatch.executeAsync();
         }
     }
+
+        public List<NoSQLEntity<Event>> SqlConverter(List<Event> events){
+            List<NoSQLEntity<Event>> sqlFEvents = new ArrayList<>();
+
+            for(int i = 0; i< events.size();i++){
+                Event e = events.get(i);
+                NoSQLEntity<Event> entity = new NoSQLEntity<Event>(AppConst.FEVENTSQL_KEY,e.getId());
+                entity.setData(e);
+                sqlFEvents.add(entity);
+            }
+            return sqlFEvents;
+        }
 
 
 
