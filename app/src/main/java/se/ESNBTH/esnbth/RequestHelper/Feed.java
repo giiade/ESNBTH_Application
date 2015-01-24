@@ -6,6 +6,7 @@ package se.ESNBTH.esnbth.RequestHelper;
 public class Feed {
     private String title;
     private String description;
+    private String createdAt;
 
     public Feed(){}
 
@@ -24,5 +25,13 @@ public class Feed {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 }

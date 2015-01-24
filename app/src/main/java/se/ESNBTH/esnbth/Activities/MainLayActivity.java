@@ -71,6 +71,7 @@ public class MainLayActivity extends ActionBarActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,12 +87,21 @@ public class MainLayActivity extends ActionBarActivity {
 
         preferences = getSharedPreferences(AppConst.PREFERENCE_KEY, MODE_PRIVATE);
 
+
+
         PendingIntent pendingIntent = PendingIntent.getService(getApplicationContext(), 0, new Intent(getApplicationContext(), UpdateService.class), 0);
         AlarmManager alarmManager = (AlarmManager) getApplicationContext()
                 .getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, Calendar.getInstance().getTimeInMillis(),AlarmManager.INTERVAL_HALF_HOUR, pendingIntent);
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,AlarmManager.INTERVAL_HOUR,AlarmManager.INTERVAL_HALF_DAY,pendingIntent);
+        //alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, Calendar.getInstance().getTimeInMillis(),30000, pendingIntent);
 
-        startService(new Intent(getApplicationContext(),UpdateService.class));
+        if(preferences.getBoolean(AppConst.FIRST_KEY,false)) {
+            startService(new Intent(getApplicationContext(), UpdateService.class));
+
+           SharedPreferences.Editor editor = preferences.edit();
+            editor.putBoolean(AppConst.FIRST_KEY,true);
+            editor.commit();
+        }
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.action_bar_layout);

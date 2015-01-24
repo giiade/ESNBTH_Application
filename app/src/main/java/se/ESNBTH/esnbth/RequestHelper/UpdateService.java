@@ -1,14 +1,18 @@
 package se.ESNBTH.esnbth.RequestHelper;
 
 import android.app.IntentService;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.colintmiller.simplenosql.NoSQL;
 import com.colintmiller.simplenosql.NoSQLEntity;
+import com.colintmiller.simplenosql.RetrievalCallback;
 import com.facebook.HttpMethod;
 import com.facebook.Request;
 import com.facebook.RequestBatch;
@@ -21,19 +25,32 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+
+import se.ESNBTH.esnbth.Activities.MainLayActivity;
+import se.ESNBTH.esnbth.Activities.Splash_Screen;
+import se.ESNBTH.esnbth.R;
 
 public class UpdateService extends Service {
 
     final String TAG = UpdateService.class.getSimpleName();
 
+    //Events
     private List<Event> events = new ArrayList<>(); //Here we will save events.
     private ArrayList<Event> imgEvents = new ArrayList<>();
     private ArrayList<Event> infoEvents = new ArrayList<>();
 
+    //Feed
+    private List<Feed> feeds = new ArrayList<>();
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+
+        //Log.i("SERVICIO","SERVICIO EMPEZADO" + Calendar.getInstance().getTimeInMillis());
+        requestFeed();
         requestAllEvents();
+        //createNotification();
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -44,16 +61,86 @@ public class UpdateService extends Service {
 
 
 
-    public void SqlConverter(List<Event> events) {
-        List<NoSQLEntity<Event>> sqlFEvents = new ArrayList<>();
+    public void EventSqlConverter(List<Event> events) {
+
 
         for (int i = 0; i < events.size(); i++) {
             Event e = events.get(i);
             NoSQLEntity<Event> entity = new NoSQLEntity<>(AppConst.EVENTSQL_KEY, e.getId());
             entity.setData(e);
             NoSQL.with(getApplicationContext()).using(Event.class).save(entity);
-
         }
+    }
+
+    public void FeedSqlConverter(List<Feed> feeds){
+        for(int i = 0 ; i < feeds.size(); i++){
+            Feed f = feeds.get(i);
+            NoSQLEntity<Feed> entity = new NoSQLEntity<Feed>(AppConst.FEEDSQL_KEY);
+            entity.setData(f);
+            NoSQL.with(getApplicationContext()).using(Feed.class).save(entity);
+        }
+    }
+
+    public void createNotification(){
+
+        Intent intent = new Intent(getApplicationContext(), MainLayActivity.class);
+
+        PendingIntent resultPendingItent = PendingIntent.getActivity(getApplicationContext(),0,intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        NotificationCompat.Builder mbuilder = new NotificationCompat.Builder(getApplicationContext())
+                .setSmallIcon(R.drawable.ic_launcher)
+                .setContentTitle("ESN BTH")
+                .setContentText("There are some new events")
+                .setContentIntent(resultPendingItent);
+
+        //Set an ID for notification.
+        int mNotification = 001;
+        //Get an instance of NotificationManager.
+        NotificationManager mNotifyMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        mNotifyMgr.notify(mNotification,mbuilder.build());
+    }
+
+    /**
+     * all last 50 feeds from the @Url Facebook
+     */
+    private void requestFeed() {
+
+        String requestTxt = AppConst.Facebook_PageName + "feed";
+        Bundle bun = new Bundle();
+        bun.putString("fields", "message,name");
+        bun.putInt("limit", 50);
+        new Request(Session.getActiveSession(), requestTxt, bun, null, new Request.Callback() {
+            @Override
+            public void onCompleted(Response response) {
+                if (response != null) {
+                    Log.i(TAG, response.toString());
+                    GraphObject gEvent = response.getGraphObject();
+                    JSONArray jFeedArray = (JSONArray) gEvent.getProperty(AppConst.DATA_KEY);
+                    for (int i = 0; i < jFeedArray.length(); i++) {
+                        Feed f = new Feed();
+                        JSONObject item = new JSONObject();
+                        try {
+                            //we get feed items
+                            item = (JSONObject) jFeedArray.get(i);
+                            String msg = item.getString(AppConst.MSG_KEY);
+                            if (!msg.equals("")) {
+                                f.setTitle(item.getString(AppConst.NAME_KEY));
+                                f.setDescription(msg);
+                                f.setCreatedAt(item.getString(AppConst.CREATEDAT_KEY));
+                                //Add Feed item to list
+                                feeds.add(f);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                    NoSQL.with(getApplicationContext()).using(Feed.class).bucketId(AppConst.FEEDSQL_KEY).delete();
+                    FeedSqlConverter(feeds);
+                }
+
+            }
+        }).executeAsync();
+
     }
 
     /**
@@ -222,13 +309,37 @@ public class UpdateService extends Service {
                 public void onBatchCompleted(RequestBatch batch) {
                     events = AppConst.mergeAllImgEvents(events,imgEvents);
                     Log.i("IMAGE-->" + TAG , events.get(0).getImgUrl());
-                    NoSQL.with(getApplicationContext()).using(Event.class).delete();
-                    SqlConverter(events);
+
+                    //Check if we have new events.
+                    List<Event> sqlEvents = getSqlEvents();
+
+                    if(events.size() > sqlEvents.size()){
+                        //We have get more events than the one we have
+                        //then we have new events
+                        createNotification();
+                    }
+
+                    NoSQL.with(getApplicationContext()).using(Event.class).bucketId(AppConst.EVENTSQL_KEY).delete();
+                    EventSqlConverter(events);
 
                 }
             });
 
             requestBatch.executeAsync();
         }
+    }
+
+
+    private List<Event> getSqlEvents(){
+        final List<Event> e = new ArrayList<>();
+        NoSQL.with(getApplicationContext()).using(Event.class).bucketId(AppConst.EVENTSQL_KEY).retrieve(new RetrievalCallback<Event>() {
+            @Override
+            public void retrievedResults(List<NoSQLEntity<Event>> noSQLEntities) {
+                for(int i = 0; i < noSQLEntities.size();i++){
+                    e.add(noSQLEntities.get(i).getData());
+                };
+            }
+        });
+        return e;
     }
 }

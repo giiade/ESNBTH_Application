@@ -11,6 +11,10 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.colintmiller.simplenosql.DataComparator;
+import com.colintmiller.simplenosql.NoSQL;
+import com.colintmiller.simplenosql.NoSQLEntity;
+import com.colintmiller.simplenosql.RetrievalCallback;
 import com.facebook.Request;
 import com.facebook.Response;
 import com.facebook.Session;
@@ -26,6 +30,7 @@ import java.util.List;
 import se.ESNBTH.esnbth.ListView.FeedAdapter;
 import se.ESNBTH.esnbth.R;
 import se.ESNBTH.esnbth.RequestHelper.AppConst;
+import se.ESNBTH.esnbth.RequestHelper.Event;
 import se.ESNBTH.esnbth.RequestHelper.Feed;
 
 public class Fragment_news extends Fragment {
@@ -59,7 +64,8 @@ public class Fragment_news extends Fragment {
 
         if (Session.getActiveSession().isOpened()) {
             Log.i(TAG, "I have a session");
-            requestFeed();
+            //requestFeed();
+            TakeFromSql();
         } else {
             Log.i(TAG, "I don't have a session");
             Toast.makeText(getActivity().getApplicationContext(), "No Internet Conecction", Toast.LENGTH_SHORT).show();
@@ -110,6 +116,38 @@ public class Fragment_news extends Fragment {
             }
         }).executeAsync();
 
+    }
+
+    private void TakeFromSql(){
+        NoSQL.with(getActivity().getApplicationContext()).using(Feed.class).bucketId(AppConst.FEEDSQL_KEY)
+                //Order the data by the date.
+                .orderBy(new DataComparator<Feed>() {
+                    @Override
+                    public int compare(NoSQLEntity<Feed> lhs, NoSQLEntity<Feed> rhs) {
+                        if (lhs != null && lhs.getData() != null) {
+                            if (rhs != null && rhs.getData() != null) {
+                                return AppConst.StrtoDateLite(rhs.getData().getCreatedAt())
+                                        .compareTo(AppConst.StrtoDateLite(lhs.getData().getCreatedAt()));
+                            } else {
+                                return 1;
+                            }
+                        } else if (rhs != null && rhs.getData() != null) {
+                            return -1;
+                        } else {
+                            return 0;
+                        }
+                    }
+                })
+                        //take the data
+                .retrieve(new RetrievalCallback<Feed>() {
+                    @Override
+                    public void retrievedResults(List<NoSQLEntity<Feed>> noSQLEntities) {
+                        for (int i = 0; i < noSQLEntities.size(); i++) {
+                            feeds.add(noSQLEntities.get(i).getData());
+                        }
+                        adapter.swapItems(feeds);
+                    }
+                });
     }
 
 

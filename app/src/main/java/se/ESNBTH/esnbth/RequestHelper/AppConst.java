@@ -27,6 +27,7 @@ public class AppConst {
     //KEY FOR SHARED PREFERENCES
     public static final String PREFERENCE_KEY = "prefkey";
     public static final String EVENT_KEY = "event";
+    public static final String FIRST_KEY = "first";
 
     //KEYS FOR EVENTS REQUEST
     public static final String ID_KEY = "id";
@@ -39,9 +40,9 @@ public class AppConst {
     //KEYS FOR FEED REQUEST
     public static final String DATA_KEY = "data";
     public static final String MSG_KEY = "message";
+    public static final String CREATEDAT_KEY = "created_time";
 
     //For NoSql
-    public static final String FEVENTSQL_KEY = "futureEvents";
     public static final String EVENTSQL_KEY = "events";
     public static final String FEEDSQL_KEY = "feed";
 

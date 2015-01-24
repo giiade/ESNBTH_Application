@@ -589,7 +589,7 @@ public class Fragment_Home extends Fragment {
         }
     }
 
-        public List<NoSQLEntity<Event>> SqlConverter(List<Event> events){
+        /*public List<NoSQLEntity<Event>> SqlConverter(List<Event> events){
             List<NoSQLEntity<Event>> sqlFEvents = new ArrayList<>();
 
             for(int i = 0; i< events.size();i++){
@@ -599,7 +599,7 @@ public class Fragment_Home extends Fragment {
                 sqlFEvents.add(entity);
             }
             return sqlFEvents;
-        }
+        }*/
 
 
 
