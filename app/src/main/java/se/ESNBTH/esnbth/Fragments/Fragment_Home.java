@@ -579,7 +579,7 @@ public class Fragment_Home extends Fragment {
 
                     Log.i("IMAGE", events.get(0).getImgUrl());
 
-                    //NoSQL.with(getActivity().getApplicationContext()).using(Event.class).save(SqlConverter(events));
+                    NoSQL.with(getActivity().getApplicationContext()).using(Event.class).save(SqlConverter(events));
 
                     eventAdapter.swapItems(events);
                 }
@@ -589,7 +589,7 @@ public class Fragment_Home extends Fragment {
         }
     }
 
-        /*public List<NoSQLEntity<Event>> SqlConverter(List<Event> events){
+        public List<NoSQLEntity<Event>> SqlConverter(List<Event> events){
             List<NoSQLEntity<Event>> sqlFEvents = new ArrayList<>();
 
             for(int i = 0; i< events.size();i++){
@@ -599,7 +599,7 @@ public class Fragment_Home extends Fragment {
                 sqlFEvents.add(entity);
             }
             return sqlFEvents;
-        }*/
+        }
 
 
 

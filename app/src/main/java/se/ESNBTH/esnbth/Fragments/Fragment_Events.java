@@ -2,8 +2,11 @@ package se.ESNBTH.esnbth.Fragments;
 
 
 import android.app.FragmentTransaction;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.preference.Preference;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +49,8 @@ public class Fragment_Events extends Fragment {
     private EventAdapter eventAdapter;
     private ListView eventList;
 
+    SharedPreferences preferences;
+
 
 
     public Fragment_Events() {
@@ -70,7 +75,7 @@ public class Fragment_Events extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        preferences = getActivity().getSharedPreferences(AppConst.PREFERENCE_KEY, Context.MODE_PRIVATE);
         //LIST
 
         eventAdapter = new EventAdapter(getActivity(), events);
@@ -78,9 +83,18 @@ public class Fragment_Events extends Fragment {
 
         if (Session.getActiveSession().isOpened()) {
             Log.i(TAG, "I have a session");
+
+            if(!preferences.getBoolean(AppConst.EVENT_KEY, false)){
+                requestAllEvents();
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putBoolean(AppConst.EVENT_KEY,true);
+                editor.commit();
+            }else{
+                TakeFromSql();
+            }
             //requestAllEvents();
             //NoSQL.with(getActivity().getApplicationContext()).using(Event.class).bucketId(AppConst.FEVENTSQL_KEY).delete();
-            TakeFromSql();
+            //TakeFromSql();
         } else {
             Log.i(TAG, "I don't have a session");
             Toast.makeText(getActivity().getApplicationContext(), "No Internet Conecction", Toast.LENGTH_SHORT).show();
@@ -283,6 +297,9 @@ public class Fragment_Events extends Fragment {
                 public void onBatchCompleted(RequestBatch batch) {
                     events = AppConst.mergeAllImgEvents(events,imgEvents);
 
+                    //Save the events on the database for the firstTime
+                    NoSQL.with(getActivity().getApplicationContext()).using(Event.class).save(SqlConverter(events));
+
                     Log.i("IMAGE", events.get(0).getImgUrl());
                     eventAdapter.swapItems(events);
                 }
@@ -322,6 +339,18 @@ public class Fragment_Events extends Fragment {
                         eventAdapter.swapItems(events);
                     }
                 });
+    }
+
+    public List<NoSQLEntity<Event>> SqlConverter(List<Event> events){
+        List<NoSQLEntity<Event>> sqlFEvents = new ArrayList<>();
+
+        for(int i = 0; i< events.size();i++){
+            Event e = events.get(i);
+            NoSQLEntity<Event> entity = new NoSQLEntity<Event>(AppConst.EVENTSQL_KEY,e.getId());
+            entity.setData(e);
+            sqlFEvents.add(entity);
+        }
+        return sqlFEvents;
     }
 
 }

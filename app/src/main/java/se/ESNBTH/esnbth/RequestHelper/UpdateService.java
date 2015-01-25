@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.colintmiller.simplenosql.NoSQL;
 import com.colintmiller.simplenosql.NoSQLEntity;
@@ -26,6 +27,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import se.ESNBTH.esnbth.Activities.MainLayActivity;
@@ -51,6 +53,7 @@ public class UpdateService extends Service {
         requestFeed();
         requestAllEvents();
         //createNotification();
+        showNotification();
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -113,6 +116,7 @@ public class UpdateService extends Service {
             public void onCompleted(Response response) {
                 if (response != null) {
                     Log.i(TAG, response.toString());
+                    feeds = new ArrayList<>();
                     GraphObject gEvent = response.getGraphObject();
                     JSONArray jFeedArray = (JSONArray) gEvent.getProperty(AppConst.DATA_KEY);
                     for (int i = 0; i < jFeedArray.length(); i++) {
@@ -311,13 +315,13 @@ public class UpdateService extends Service {
                     Log.i("IMAGE-->" + TAG , events.get(0).getImgUrl());
 
                     //Check if we have new events.
-                    List<Event> sqlEvents = getSqlEvents();
+                    //List<Event> sqlEvents = getSqlEvents();
 
-                    if(events.size() > sqlEvents.size()){
+                    //if(events.size() > sqlEvents.size()){
                         //We have get more events than the one we have
                         //then we have new events
-                        createNotification();
-                    }
+                        //createNotification();
+                    //}
 
                     NoSQL.with(getApplicationContext()).using(Event.class).bucketId(AppConst.EVENTSQL_KEY).delete();
                     EventSqlConverter(events);
@@ -329,10 +333,59 @@ public class UpdateService extends Service {
         }
     }
 
+    private void showNotification(){
+        String EVENTS = "events";
+        Date date = Calendar.getInstance().getTime();
+        String since = String.valueOf(date.getTime()).substring(0,10);
+
+        Bundle bun = new Bundle();
+        bun.putString("fields","id");
+        bun.putString("since",since);
+        bun.putInt("limit",100);
+
+
+        //PAGEID/Events
+
+        String requestStuff = AppConst.Facebook_PageName+EVENTS;
+        new Request(Session.getActiveSession(),requestStuff,bun, HttpMethod.GET, new Request.Callback() {
+            @Override
+            public void onCompleted(Response response) {
+                Log.i(TAG,response.toString());
+                if(Session.getActiveSession().isOpened()) {
+                    List<Event> auxEvents = new ArrayList<>();
+                    GraphObject jRequest = response.getGraphObject();
+                    JSONArray jEvents = (JSONArray) jRequest.getProperty("data");
+                    if (jEvents != null && jEvents.length() > 0) {
+                        for (int i = 0; i < jEvents.length(); i++) {
+                            JSONObject item = null;
+                            try {
+                                item = (JSONObject) jEvents.get(i);
+                                Event event = new Event();
+                                event.setId(item.getString(AppConst.ID_KEY));
+
+                                String message = (String) item.get("id");
+                                Log.i(TAG + " -->FUTURE_EVENTS " + i, message);
+                                auxEvents.add(event);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        //Compare it with the events we have on sql.
+                        List<Event> sqlEvents = getSqlEvents();
+
+                        if(auxEvents.size() > sqlEvents.size()){
+                            createNotification();
+                        }
+                    }
+                }
+            }
+        }).executeAsync();
+    }
+
 
     private List<Event> getSqlEvents(){
         final List<Event> e = new ArrayList<>();
-        NoSQL.with(getApplicationContext()).using(Event.class).bucketId(AppConst.EVENTSQL_KEY).retrieve(new RetrievalCallback<Event>() {
+        NoSQL.with(getApplicationContext()).using(Event.class).bucketId(AppConst.FEVENTSQL_KEY).retrieve(new RetrievalCallback<Event>() {
             @Override
             public void retrievedResults(List<NoSQLEntity<Event>> noSQLEntities) {
                 for(int i = 0; i < noSQLEntities.size();i++){

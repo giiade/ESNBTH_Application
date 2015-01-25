@@ -1,9 +1,12 @@
 package se.ESNBTH.esnbth.Fragments;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.preference.Preference;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,14 +61,23 @@ public class Fragment_news extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-
+        SharedPreferences preferences = getActivity().getSharedPreferences(AppConst.FEED_KEY, Context.MODE_PRIVATE);
         adapter = new FeedAdapter(getActivity(), feeds);
         feedList.setAdapter(adapter);
 
         if (Session.getActiveSession().isOpened()) {
             Log.i(TAG, "I have a session");
+
+            if(!preferences.getBoolean(AppConst.FEED_KEY, false)){
+                requestFeed();
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putBoolean(AppConst.FEED_KEY,true);
+                editor.commit();
+            }else{
+                TakeFromSql();
+            }
             //requestFeed();
-            TakeFromSql();
+            //TakeFromSql();
         } else {
             Log.i(TAG, "I don't have a session");
             Toast.makeText(getActivity().getApplicationContext(), "No Internet Conecction", Toast.LENGTH_SHORT).show();
@@ -89,6 +101,7 @@ public class Fragment_news extends Fragment {
             public void onCompleted(Response response) {
                 if (response != null) {
                     Log.i(TAG, response.toString());
+                    feeds = new ArrayList<Feed>();
                     GraphObject gEvent = response.getGraphObject();
                     JSONArray jFeedArray = (JSONArray) gEvent.getProperty(AppConst.DATA_KEY);
                     for (int i = 0; i < jFeedArray.length(); i++) {
@@ -111,6 +124,8 @@ public class Fragment_news extends Fragment {
 
                     }
                     adapter.swapItems(feeds);
+                    NoSQL.with(getActivity().getApplicationContext()).using(Feed.class).delete();
+                    NoSQL.with(getActivity().getApplicationContext()).using(Feed.class).save(SqlConverter(feeds));
                 }
 
             }
@@ -148,6 +163,18 @@ public class Fragment_news extends Fragment {
                         adapter.swapItems(feeds);
                     }
                 });
+    }
+
+    public List<NoSQLEntity<Feed>> SqlConverter(List<Feed> feeds){
+        List<NoSQLEntity<Feed>> sqlFEvents = new ArrayList<>();
+
+        for(int i = 0; i< feeds.size();i++){
+            Feed f = feeds.get(i);
+            NoSQLEntity<Feed> entity = new NoSQLEntity<Feed>(AppConst.FEEDSQL_KEY);
+            entity.setData(f);
+            sqlFEvents.add(entity);
+        }
+        return sqlFEvents;
     }
 
 
