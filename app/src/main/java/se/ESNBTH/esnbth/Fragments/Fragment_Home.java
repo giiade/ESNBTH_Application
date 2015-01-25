@@ -400,9 +400,6 @@ public class Fragment_Home extends Fragment {
         bun.putString("since",since);
         bun.putInt("limit",100);
 
-
-        //PAGEID/Events
-
         String requestStuff = AppConst.Facebook_PageName+EVENTS;
         new Request(Session.getActiveSession(),requestStuff,bun, HttpMethod.GET, new Request.Callback() {
             @Override
@@ -419,10 +416,6 @@ public class Fragment_Home extends Fragment {
                                 item = (JSONObject) jEvents.get(i);
                                 Event event = new Event();
                                 event.setId(item.getString(AppConst.ID_KEY));
-                                //event.setName(item.getString(AppConst.NAME_KEY));
-                                //event.setDescription(item.getString(AppConst.DESCRIPTION_KEY));
-                                //event.setLocation(item.getString(AppConst.DESCRIPTION_KEY));
-                                //event.setStartTime(item.getString(AppConst.START_TIME_KEY));
 
                                 String message = (String) item.get("id");
                                 Log.i(TAG + ".ITEM " + i, message);

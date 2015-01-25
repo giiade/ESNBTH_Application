@@ -114,6 +114,7 @@ public class Fragment_news extends Fragment {
                             if (!msg.equals("")) {
                                 f.setTitle(item.getString(AppConst.NAME_KEY));
                                 f.setDescription(msg);
+                                f.setCreatedAt(item.getString(AppConst.CREATEDAT_KEY));
 
                                 //Add Feed item to list
                                 feeds.add(f);
@@ -157,6 +158,7 @@ public class Fragment_news extends Fragment {
                 .retrieve(new RetrievalCallback<Feed>() {
                     @Override
                     public void retrievedResults(List<NoSQLEntity<Feed>> noSQLEntities) {
+                        feeds = new ArrayList<Feed>();
                         for (int i = 0; i < noSQLEntities.size(); i++) {
                             feeds.add(noSQLEntities.get(i).getData());
                         }

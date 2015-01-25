@@ -47,14 +47,21 @@ public class UpdateService extends Service {
     private List<Feed> feeds = new ArrayList<>();
 
     @Override
+    public void onCreate() {
+        Log.i("SERVICIO","SERVICIO EMPEZADO" );
+        super.onCreate();
+    }
+
+    @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        //Log.i("SERVICIO","SERVICIO EMPEZADO" + Calendar.getInstance().getTimeInMillis());
+        Log.i("SERVICIO","SERVICIO Llamado" + Calendar.getInstance().getTimeInMillis());
         requestFeed();
         requestAllEvents();
         //createNotification();
         showNotification();
-        return super.onStartCommand(intent, flags, startId);
+        //return super.onStartCommand(intent, flags, startId);
+        return START_STICKY;
     }
 
     @Override
@@ -333,6 +340,12 @@ public class UpdateService extends Service {
         }
     }
 
+
+    /**
+     *Make a request to the server and download new events, the compare the size of
+     * this array with the one that we retrieve from sql and if the one retrieved is bigger
+     * it shows a notification.
+     */
     private void showNotification(){
         String EVENTS = "events";
         Date date = Calendar.getInstance().getTime();
@@ -342,9 +355,6 @@ public class UpdateService extends Service {
         bun.putString("fields","id");
         bun.putString("since",since);
         bun.putInt("limit",100);
-
-
-        //PAGEID/Events
 
         String requestStuff = AppConst.Facebook_PageName+EVENTS;
         new Request(Session.getActiveSession(),requestStuff,bun, HttpMethod.GET, new Request.Callback() {
@@ -382,7 +392,10 @@ public class UpdateService extends Service {
         }).executeAsync();
     }
 
-
+    /**
+     * Take all the data from the future events table.
+     * @return List of events. List<Event>
+     */
     private List<Event> getSqlEvents(){
         final List<Event> e = new ArrayList<>();
         NoSQL.with(getApplicationContext()).using(Event.class).bucketId(AppConst.FEVENTSQL_KEY).retrieve(new RetrievalCallback<Event>() {
