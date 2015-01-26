@@ -64,6 +64,7 @@ public class MainLayActivity extends ActionBarActivity {
 
     public Fragment fragment;
     public static int previousFragment = 0;
+    public static int nav = 0;
 
     SharedPreferences preferences;
 
@@ -325,13 +326,13 @@ public class MainLayActivity extends ActionBarActivity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.list_slidermenu);
 
-        if(previousFragment == 0){
+        /*if(previousFragment == 0){
             mDrawerList.setItemChecked(3, true);
             mDrawerList.setSelection(3);
             mDrawerLayout.closeDrawer(mDrawerList);
             getFragmentManager().popBackStack();
         }
-        else if(previousFragment == 1){
+        else */if(previousFragment == 1){
             mDrawerList.setItemChecked(4, true);
             mDrawerList.setSelection(4);
             mDrawerLayout.closeDrawer(mDrawerList);
@@ -343,6 +344,13 @@ public class MainLayActivity extends ActionBarActivity {
             return true;
         }
         return super.onTouchEvent(event);
+    }
+
+    public void setNavigationDrawer(int g){
+        mDrawerList.setItemChecked(g, true);
+        mDrawerList.setSelection(g);
+        mDrawerLayout.closeDrawer(mDrawerList);
+        getFragmentManager().popBackStack();
     }
 
     @Override

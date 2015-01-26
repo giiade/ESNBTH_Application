@@ -160,6 +160,24 @@ public class Fragment_Home extends Fragment {
             }
         });
 
+        btnAboutUs.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch (View v, MotionEvent event){
+
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+
+                    Fragment_AboutESN newFragment = new Fragment_AboutESN();
+
+                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    transaction.replace(R.id.frame_container, newFragment);
+                    transaction.commit();
+
+                    return true;
+                }
+                return true;
+            }
+        });
+
         btnVisitUs.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch (View v, MotionEvent event){

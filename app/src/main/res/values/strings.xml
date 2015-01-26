@@ -54,6 +54,21 @@
         pleasant shopping, cool events and great places to visit.</string>
     <string name="karlskronaWelcome">Welcome to Karlskrona, in the middle of the archipelago!</string>
 
+    <string name="esnDescription1">
+        Erasmus Student Network (ESN) is one of the biggest interdisciplinary student associations in Europe.
+        The organization was founded in 1989 with the aim of supporting and developing student exchange.
+        Today we\'re present in over 420 Higher Education Institutions (HEI), also know as local ESN sections, from 36 countries.
+    </string>
+
+    <string name="esnDescription2">
+        ESN works for the creation of a more mobile and flexible education environment by supporting and developing
+        the student exchange from different levels.
+    </string>
+
+    <string name="esnDescription3">
+        We are ESN!
+    </string>
+
     <!-- Shop Names -->
     <string-array name="ShopsName">
         <item>City Gross</item>

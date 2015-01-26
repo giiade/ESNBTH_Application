@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import se.ESNBTH.esnbth.Activities.MainLayActivity;
 import se.ESNBTH.esnbth.R;
 
 public class Fragment_AboutESN extends Fragment {
@@ -18,8 +19,8 @@ public class Fragment_AboutESN extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_karlskrona, container, false);
-        //TODO: CHANGE TO FRAGMENT ESN
+        View rootView = inflater.inflate(R.layout.fragment_aboutesn, container, false);
+        ((MainLayActivity)getActivity()).setNavigationDrawer(5);
 
 
 

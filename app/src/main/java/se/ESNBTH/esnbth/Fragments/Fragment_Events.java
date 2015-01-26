@@ -33,6 +33,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import se.ESNBTH.esnbth.Activities.MainLayActivity;
 import se.ESNBTH.esnbth.ListView.EventAdapter;
 import se.ESNBTH.esnbth.R;
 import se.ESNBTH.esnbth.RequestHelper.AppConst;
@@ -68,7 +69,7 @@ public class Fragment_Events extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_events, container, false);
         eventList = (ListView) rootView.findViewById(R.id.eventsList);
-
+        ((MainLayActivity)getActivity()).setNavigationDrawer(2);
         return rootView;
     }
 

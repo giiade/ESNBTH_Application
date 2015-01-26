@@ -30,6 +30,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import se.ESNBTH.esnbth.Activities.MainLayActivity;
 import se.ESNBTH.esnbth.ListView.FeedAdapter;
 import se.ESNBTH.esnbth.R;
 import se.ESNBTH.esnbth.RequestHelper.AppConst;
@@ -54,6 +55,7 @@ public class Fragment_news extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_news, container, false);
         feedList = (ListView) rootView.findViewById(R.id.newsList);
+        ((MainLayActivity)getActivity()).setNavigationDrawer(1);
         return rootView;
     }
 
