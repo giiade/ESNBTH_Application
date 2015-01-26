@@ -38,6 +38,10 @@ public class UpdateService extends Service {
 
     final String TAG = UpdateService.class.getSimpleName();
 
+    boolean e = false;
+    boolean f = false;
+    boolean fe = false;
+
     //Events
     private List<Event> events = new ArrayList<>(); //Here we will save events.
     private ArrayList<Event> imgEvents = new ArrayList<>();
@@ -60,7 +64,16 @@ public class UpdateService extends Service {
         requestAllEvents();
         //createNotification();
         showNotification();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(!e || !f || !fe){}
+                stopSelf();
+            }
+        }).start();
+
         //return super.onStartCommand(intent, flags, startId);
+
         return START_STICKY;
     }
 
@@ -121,7 +134,7 @@ public class UpdateService extends Service {
         new Request(Session.getActiveSession(), requestTxt, bun, null, new Request.Callback() {
             @Override
             public void onCompleted(Response response) {
-                if (response != null) {
+                if (response != null && Session.getActiveSession().isOpened()) {
                     Log.i(TAG, response.toString());
                     feeds = new ArrayList<>();
                     GraphObject gEvent = response.getGraphObject();
@@ -147,6 +160,7 @@ public class UpdateService extends Service {
                     }
                     NoSQL.with(getApplicationContext()).using(Feed.class).bucketId(AppConst.FEEDSQL_KEY).delete();
                     FeedSqlConverter(feeds);
+                    f = true;
                 }
 
             }
@@ -332,6 +346,8 @@ public class UpdateService extends Service {
 
                     NoSQL.with(getApplicationContext()).using(Event.class).bucketId(AppConst.EVENTSQL_KEY).delete();
                     EventSqlConverter(events);
+                    e = true;
+
 
                 }
             });
@@ -387,6 +403,7 @@ public class UpdateService extends Service {
                             createNotification();
                         }
                     }
+                    fe = true;
                 }
             }
         }).executeAsync();

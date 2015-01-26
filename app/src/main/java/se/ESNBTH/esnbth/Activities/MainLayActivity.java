@@ -92,8 +92,8 @@ public class MainLayActivity extends ActionBarActivity {
         PendingIntent pendingIntent = PendingIntent.getService(getApplicationContext(), 0, new Intent(getApplicationContext(), UpdateService.class), 0);
         AlarmManager alarmManager = (AlarmManager) getApplicationContext()
                 .getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,AlarmManager.INTERVAL_HOUR,AlarmManager.INTERVAL_HALF_DAY,pendingIntent);
-        //alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, Calendar.getInstance().getTimeInMillis(),AlarmManager.INTERVAL_DAY, pendingIntent);
+        //alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,AlarmManager.INTERVAL_HOUR,AlarmManager.INTERVAL_HALF_DAY,pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, Calendar.getInstance().getTimeInMillis(),AlarmManager.INTERVAL_HOUR*2, pendingIntent);
 
 
 
