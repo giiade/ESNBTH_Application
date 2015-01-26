@@ -19,7 +19,7 @@ public class Fragment_AboutESN extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_aboutesn, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_aboutesnn, container, false);
         ((MainLayActivity)getActivity()).setNavigationDrawer(5);
 
 
