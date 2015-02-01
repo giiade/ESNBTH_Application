@@ -1,6 +1,7 @@
 package se.ESNBTH.esnbth.Activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -53,6 +54,14 @@ public class Splash_Screen extends FragmentActivity {
         @Override
         public void call(Session session, SessionState state,
                          Exception exception) {
+
+            if (exception != null) {
+                new AlertDialog.Builder(Splash_Screen.this)
+                        .setTitle("ok")
+                        .setMessage(exception.getMessage())
+                        .show();
+            }
+
             if (state.isOpened()) {
                 Log.d("FacebookSampleActivity", "Facebook session opened");
             } else if (state.isClosed()) {

@@ -17,7 +17,8 @@
             android:value="@string/facebook_app_id"/>
         <activity
             android:name=".Activities.Splash_Screen"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,7 +29,8 @@
         </activity>
         <activity
             android:name=".Activities.MainLayActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
 
         </activity>
 
