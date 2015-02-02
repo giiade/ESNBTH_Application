@@ -255,7 +255,7 @@ public class MainLayActivity extends ActionBarActivity {
             case 2:
                 //UPDATE LIST VIEW
                 Fragment_Timetables.selection = 0;
-                fragment = new Fragment_SingleEvent();
+                fragment = new Fragment_Events();
                 break;
 
             case 3:
