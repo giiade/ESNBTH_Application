@@ -63,6 +63,7 @@ public class Fragment_Timetables extends Fragment implements AdapterView.OnItemC
 
         openClosedText = (TextView) rootView.findViewById(R.id.openClosed);
 
+        ((MainLayActivity)getActivity()).setNavigationDrawer(4);
 
 
         for (int i = 0; i < shop_names.length; i++) {

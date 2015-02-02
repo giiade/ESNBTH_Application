@@ -31,6 +31,7 @@ public class Fragment_Karlskrona extends Fragment {
         //UPDATE LIST VIEW
         Fragment_Timetables.selection = 0;
         MainLayActivity.previousFragment = 0;
+        ((MainLayActivity)getActivity()).setNavigationDrawer(3);
 
         btnTimetable = (Button) rootView.findViewById(R.id.btnTimetable);
 

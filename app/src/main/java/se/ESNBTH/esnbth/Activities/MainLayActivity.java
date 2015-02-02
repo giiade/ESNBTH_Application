@@ -328,18 +328,7 @@ public class MainLayActivity extends ActionBarActivity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.list_slidermenu);
 
-        /*if(previousFragment == 0){
-            mDrawerList.setItemChecked(3, true);
-            mDrawerList.setSelection(3);
-            mDrawerLayout.closeDrawer(mDrawerList);
-            getFragmentManager().popBackStack();
-        }
-        else */if(previousFragment == 1){
-            mDrawerList.setItemChecked(4, true);
-            mDrawerList.setSelection(4);
-            mDrawerLayout.closeDrawer(mDrawerList);
-            getFragmentManager().popBackStack();
-        }
+
 
         if (mDrawerLayout.isDrawerOpen(mDrawerList) ||
                 mDrawerLayout.isDrawerVisible(mDrawerList)) {
