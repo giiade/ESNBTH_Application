@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.AlarmManager;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -29,6 +30,7 @@ import java.util.Calendar;
 
 import se.ESNBTH.esnbth.Fragments.Fragment_AboutESN;
 import se.ESNBTH.esnbth.Fragments.Fragment_DetailTimetable;
+import se.ESNBTH.esnbth.Fragments.Fragment_Events;
 import se.ESNBTH.esnbth.Fragments.Fragment_Home;
 import se.ESNBTH.esnbth.Fragments.Fragment_Karlskrona;
 import se.ESNBTH.esnbth.Fragments.Fragment_SingleEvent;
@@ -63,7 +65,7 @@ public class MainLayActivity extends ActionBarActivity {
     private NavDrawerListAdapter adapter;
 
     public Fragment fragment;
-    public static int previousFragment = 0;
+    public static int previousFragment = -1;
     public static int nav = 0;
 
     SharedPreferences preferences;
@@ -356,6 +358,11 @@ public class MainLayActivity extends ActionBarActivity {
     @Override
     public void onBackPressed() {
 
+        if(previousFragment == -1){
+            finish();
+            System.exit(0);
+        }
+
         if(previousFragment == 0){
             fragment = new Fragment_Home();
             FragmentManager fragmentManager = getFragmentManager();
@@ -394,6 +401,13 @@ public class MainLayActivity extends ActionBarActivity {
             mDrawerList.setSelection(4);
             mDrawerLayout.closeDrawer(mDrawerList);
             getFragmentManager().popBackStack();
+        }
+
+        else if (previousFragment == 3){
+            fragment = new Fragment_Events();
+
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();
         }
     }
 

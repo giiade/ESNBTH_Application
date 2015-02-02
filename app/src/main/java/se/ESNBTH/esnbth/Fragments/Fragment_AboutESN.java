@@ -21,6 +21,7 @@ public class Fragment_AboutESN extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_aboutesnn, container, false);
         ((MainLayActivity)getActivity()).setNavigationDrawer(5);
+        MainLayActivity.previousFragment = 0;
 
 
 

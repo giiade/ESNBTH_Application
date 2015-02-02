@@ -70,6 +70,7 @@ public class Fragment_Events extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_events, container, false);
         eventList = (ListView) rootView.findViewById(R.id.eventsList);
         ((MainLayActivity)getActivity()).setNavigationDrawer(2);
+        MainLayActivity.previousFragment = 0;
         return rootView;
     }
 

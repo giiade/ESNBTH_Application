@@ -45,6 +45,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import se.ESNBTH.esnbth.Activities.MainLayActivity;
 import se.ESNBTH.esnbth.ListView.EventAdapter;
 import se.ESNBTH.esnbth.R;
 import se.ESNBTH.esnbth.RequestHelper.AppConst;
@@ -106,6 +107,7 @@ public class Fragment_Home extends Fragment {
         eventList = (ListView) rootView.findViewById(R.id.eventLst_main);
         eventAdapter = new EventAdapter(getActivity(), events);
         eventList.setAdapter(eventAdapter);
+        MainLayActivity.previousFragment = -1;
 
 
         btnNews = (Button) rootView.findViewById(R.id.btnNews);

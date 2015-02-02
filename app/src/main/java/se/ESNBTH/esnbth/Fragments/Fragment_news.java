@@ -56,6 +56,7 @@ public class Fragment_news extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_news, container, false);
         feedList = (ListView) rootView.findViewById(R.id.newsList);
         ((MainLayActivity)getActivity()).setNavigationDrawer(1);
+        MainLayActivity.previousFragment = 0;
         return rootView;
     }
 

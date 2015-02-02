@@ -17,6 +17,7 @@ import java.util.Calendar;
 import java.util.Random;
 import java.util.concurrent.TimeoutException;
 
+import se.ESNBTH.esnbth.Activities.MainLayActivity;
 import se.ESNBTH.esnbth.R;
 import se.ESNBTH.esnbth.RequestHelper.AppConst;
 import se.ESNBTH.esnbth.RequestHelper.Event;
@@ -41,6 +42,7 @@ public class Fragment_SingleEvent extends Fragment {
         Event event = getArguments().getParcelable(AppConst.EVENT_KEY);
 
         Resources color = getResources();
+        MainLayActivity.previousFragment = 3;
 
         int[] colorIds = {R.color.blue, R.color.ESNGreen,R.color.ESNOrange,R.color.ESNPink};
         int colorPos = (int) (Math.random()*colorIds.length);

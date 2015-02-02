@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import se.ESNBTH.esnbth.Activities.MainLayActivity;
 import se.ESNBTH.esnbth.R;
 
 public class Fragment_Karlskrona extends Fragment {
@@ -29,6 +30,7 @@ public class Fragment_Karlskrona extends Fragment {
 
         //UPDATE LIST VIEW
         Fragment_Timetables.selection = 0;
+        MainLayActivity.previousFragment = 0;
 
         btnTimetable = (Button) rootView.findViewById(R.id.btnTimetable);
 
