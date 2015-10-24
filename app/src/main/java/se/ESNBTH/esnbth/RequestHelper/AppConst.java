@@ -11,7 +11,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import se.ESNBTH.esnbth.R;
@@ -46,6 +45,13 @@ public class AppConst {
     public static final String EVENTSQL_KEY = "events";
     public static final String FEVENTSQL_KEY = "fevents";
     public static final String FEEDSQL_KEY = "feed";
+
+
+
+
+    //TODO: Parse ARRAYLIST to String
+
+    //TODO: Parse String to ArrayList
 
 
     /**

@@ -21,7 +21,7 @@
         android:layout_above="@+id/buttonContainer"
         android:src="@drawable/reno"
         android:adjustViewBounds="true"
-        android:scaleType="fitXY" />
+        android:scaleType="centerInside" />
 
     <LinearLayout
         android:id="@+id/buttonContainer"

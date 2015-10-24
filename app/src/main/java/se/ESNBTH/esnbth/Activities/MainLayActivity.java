@@ -4,7 +4,6 @@ import android.app.ActionBar;
 import android.app.AlarmManager;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -33,7 +32,6 @@ import se.ESNBTH.esnbth.Fragments.Fragment_DetailTimetable;
 import se.ESNBTH.esnbth.Fragments.Fragment_Events;
 import se.ESNBTH.esnbth.Fragments.Fragment_Home;
 import se.ESNBTH.esnbth.Fragments.Fragment_Karlskrona;
-import se.ESNBTH.esnbth.Fragments.Fragment_SingleEvent;
 import se.ESNBTH.esnbth.Fragments.Fragment_Timetables;
 import se.ESNBTH.esnbth.Fragments.Fragment_news;
 import se.ESNBTH.esnbth.NavigationDrawer.NavDrawerItem;
@@ -86,17 +84,16 @@ public class MainLayActivity extends ActionBarActivity {
         * Intent's "data" field.
         */
 
-
-
         preferences = getSharedPreferences(AppConst.PREFERENCE_KEY, MODE_PRIVATE);
 
 
-
+        Context c = getApplicationContext();
         PendingIntent pendingIntent = PendingIntent.getService(getApplicationContext(), 0, new Intent(getApplicationContext(), UpdateService.class), 0);
+
         AlarmManager alarmManager = (AlarmManager) getApplicationContext()
                 .getSystemService(Context.ALARM_SERVICE);
         //alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,AlarmManager.INTERVAL_HOUR,AlarmManager.INTERVAL_HALF_DAY,pendingIntent);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, Calendar.getInstance().getTimeInMillis(),AlarmManager.INTERVAL_HOUR*2, pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, Calendar.getInstance().getTimeInMillis(),AlarmManager.INTERVAL_HALF_DAY, pendingIntent);
 
 
 
@@ -169,6 +166,8 @@ public class MainLayActivity extends ActionBarActivity {
         // Logs 'install' and 'app activate' App Events.
         AppEventsLogger.activateApp(this);
     }
+
+
 
     @Override
     protected void onPause() {
@@ -314,6 +313,7 @@ public class MainLayActivity extends ActionBarActivity {
         super.onPostCreate(savedInstanceState);
         // Sync the toggle state after onRestoreInstanceState has occurred.
         mDrawerToggle.syncState();
+        StringBuffer head = new StringBuffer();
     }
 
     @Override
@@ -349,7 +349,6 @@ public class MainLayActivity extends ActionBarActivity {
 
         if(previousFragment == -1){
             finish();
-            System.exit(0);
         }
 
         if(previousFragment == 0){
@@ -398,6 +397,8 @@ public class MainLayActivity extends ActionBarActivity {
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();
         }
+
+
     }
 
 

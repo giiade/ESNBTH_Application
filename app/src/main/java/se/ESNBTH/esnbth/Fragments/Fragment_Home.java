@@ -5,7 +5,6 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,7 +19,6 @@ import android.widget.Toast;
 
 import com.colintmiller.simplenosql.NoSQL;
 import com.colintmiller.simplenosql.NoSQLEntity;
-import com.colintmiller.simplenosql.RetrievalCallback;
 import com.facebook.HttpMethod;
 import com.facebook.Request;
 import com.facebook.RequestBatch;
@@ -29,17 +27,11 @@ import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.model.GraphObject;
-import com.facebook.model.GraphObjectList;
-import com.facebook.model.GraphUser;
-import com.facebook.widget.LoginButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -60,6 +52,7 @@ public class Fragment_Home extends Fragment {
     private Button btnAboutKarlskrona;
     private Button btnAboutUs;
     private Button btnVisitUs;
+    private Context context;
 
     private UiLifecycleHelper uiHelper;
     private Fragment fragment;
@@ -445,6 +438,7 @@ public class Fragment_Home extends Fragment {
                             }
                         }
                         //Get Information of events
+                        context = getActivity().getApplicationContext();
                         batchRequestEvents(events);
                     } else {
                         Event event = new Event();
@@ -592,7 +586,7 @@ public class Fragment_Home extends Fragment {
 
                     Log.i("IMAGE", events.get(0).getImgUrl());
 
-                    NoSQL.with(getActivity().getApplicationContext()).using(Event.class).save(SqlConverter(events));
+                    NoSQL.with(context).using(Event.class).save(SqlConverter(events));
 
                     eventAdapter.swapItems(events);
                 }
